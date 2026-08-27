@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  /* color pallette */
   --color-text-primary: #1e1e24;
   --color-text-secondary: #5c5d6b;
   --color-text-disabled: #8a8783;
@@ -14,4 +15,14 @@
   --color-pending: #c27a00;
   --color-success: #4f772d;
   --color-disabled: #d6d2cd;
+
+  /* layout widths */
+  --layout-width: 290px;
+  --layout-width-xl: 1170px;
+  --layout-width-2xl: 1360px;
+
+  /* screens */
+  --screen-md: 768px;
+  --screen-xl: 1280px;
+  --screen-2xl: 1536px;
 }
