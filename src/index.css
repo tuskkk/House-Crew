@@ -1,6 +1,8 @@
+@import "@fontsource-variable/red-hat-display/wght.css";
 @import "tailwindcss";
 
 @theme {
+  --font-sans: "Red Hat Display Variable", sans-serif;
   /* color pallette */
   --color-text-primary: #1e1e24;
   --color-text-secondary: #5c5d6b;
