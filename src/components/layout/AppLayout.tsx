@@ -1,9 +1,6 @@
-/*import { Outlet } from "react-router-dom";*/
-type AppLayoutProps = {
-  children: React.ReactNode;
-}; // remove this if you want to use react-router-dom and <Outlet /> instead of {children}
+import { Outlet } from "react-router";
 
-export default function AppLayout({ children }: AppLayoutProps) {
+export default function AppLayout() {
   return (
     <div className="min-h-screen bg-background text-text-primary">
       <div className="flex min-h-screen">
@@ -24,9 +21,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
           {/* Content */}
           <main className="flex-1">
             <div className="mx-auto w-full max-w-[var(--layout-width-xl)] px-4 py-6 sm:px-6 lg:px-8">
-              {/* <Outlet /> */}
-              {children}{" "}
-              {/* change this to <Outlet /> if you want to use react-router-dom */}
+              <Outlet />
             </div>
           </main>
 
