@@ -1,19 +1,19 @@
 import { Outlet } from "react-router";
+import { useState } from "react";
 import Sidebar from "./Sidebar";
+import Header from "./header/Header";
 
 export default function AppLayout() {
+  const [isOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background text-text-primary">
       <div className="flex min-h-screen">
-        {/* Sidebar */}
-        <Sidebar />
+        <Sidebar isOpen={isOpen} setIsOpen={setIsSidebarOpen} />
 
         {/* Main layout */}
         <div className="flex min-w-0 flex-1 flex-col">
-          {/* Header */}
-          <header className="flex h-16 shrink-0 items-center border-b border-secondary bg-background px-6">
-            <span className="text-sm font-medium">Header</span>
-          </header>
+          <Header onMenuClick={() => setIsSidebarOpen(true)} />
 
           {/* Content */}
           <main className="flex-1">

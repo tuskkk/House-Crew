@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink } from "react-router";
 import {
   CalendarDays,
@@ -38,30 +37,19 @@ const navigation = [
   },
 ];
 
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface SidebarProps {
+  isOpen: boolean;
+  setIsOpen: (shouldOpen: boolean) => void;
+}
 
-  const closeSidebar = () => {
-    setIsOpen(false);
-  };
-
+const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
   return (
     <>
-      {/* Mobile menu button */}
-      <button
-        type="button"
-        onClick={() => setIsOpen(true)}
-        aria-label="Open navigation menu"
-        className="fixed left-4 top-4 z-40 flex h-10 w-10 items-center justify-center rounded-lg bg-white text-text-primary shadow-sm lg:hidden"
-      >
-        <Menu size={22} strokeWidth={1.8} />
-      </button>
-
       {/* Mobile overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/30 lg:hidden"
-          onClick={closeSidebar}
+          onClick={() => setIsOpen(false)}
           aria-hidden="true"
         />
       )}
@@ -79,7 +67,7 @@ const Sidebar = () => {
           {/* Mobile close button */}
           <button
             type="button"
-            onClick={closeSidebar}
+            onClick={() => setIsOpen(false)}
             aria-label="Close navigation menu"
             className="flex h-9 w-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-secondary/30 hover:text-text-primary lg:hidden"
           >
@@ -98,7 +86,7 @@ const Sidebar = () => {
                   <NavLink
                     to={item.path}
                     end={item.path === "/app"}
-                    onClick={closeSidebar}
+                    onClick={() => setIsOpen(false)}
                     className={({ isActive }) =>
                       `group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                         isActive
