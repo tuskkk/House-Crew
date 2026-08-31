@@ -1,15 +1,12 @@
 import { Outlet } from "react-router";
+import Sidebar from "./Sidebar";
 
 export default function AppLayout() {
   return (
     <div className="min-h-screen bg-background text-text-primary">
       <div className="flex min-h-screen">
         {/* Sidebar */}
-        <aside className="hidden w-[var(--layout-width)] shrink-0 bg-accent text-white md:block">
-          <div className="flex h-full items-center justify-center">
-            <span className="text-sm">Sidebar</span>
-          </div>
-        </aside>
+        <Sidebar />
 
         {/* Main layout */}
         <div className="flex min-w-0 flex-1 flex-col">
@@ -20,7 +17,7 @@ export default function AppLayout() {
 
           {/* Content */}
           <main className="flex-1">
-            <div className="mx-auto w-full max-w-[var(--layout-width-xl)] px-4 py-6 sm:px-6 lg:px-8">
+            <div className="mx-auto w-full max-w-[var(--layout-width-xl)] px-6 pt-16 pb-6 md:px-4 lg:px-8 lg:pt-0">
               <Outlet />
             </div>
           </main>
