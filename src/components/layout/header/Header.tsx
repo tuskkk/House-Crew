@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { Bell, ChevronDown, LogOut, Menu, Settings } from "lucide-react";
+import { ChevronDown, LogOut, Menu, Settings } from "lucide-react";
 import Avatar from "./Avatar";
+import NotificationButton from "./NotificationButton";
 
 interface HeaderProps {
   username?: string;
@@ -50,22 +51,7 @@ export default function Header({
       {/* Right side */}
       <div className="flex items-center gap-3">
         {/* Notifications */}
-        <Link
-          to="/notifications"
-          aria-label={
-            hasUnreadNotifications ? "Notifications, unread" : "Notifications"
-          }
-          className="relative rounded-md p-2 text-text-secondary transition hover:bg-surface hover:text-text-primary"
-        >
-          <Bell size={21} />
-
-          {hasUnreadNotifications && (
-            <span
-              aria-label="Unread notifications"
-              className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-primary"
-            />
-          )}
-        </Link>
+        <NotificationButton hasUnreadNotifications={hasUnreadNotifications} />
 
         {/* User profile */}
         <div className="relative">
