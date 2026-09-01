@@ -19,9 +19,20 @@ export default function Header({
   onLogout,
 }: HeaderProps) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [areNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
   const handleProfileToggle = () => {
     setIsProfileOpen((prev) => !prev);
+    if (areNotificationsOpen) {
+      setIsNotificationsOpen(false);
+    }
+  };
+
+  const handleNotificationsToggle = () => {
+    setIsNotificationsOpen((prev) => !prev);
+    if (isProfileOpen) {
+      setIsProfileOpen(false);
+    }
   };
 
   const handleLogout = () => {
@@ -46,12 +57,14 @@ export default function Header({
         {/* Page title / logo */}
         <div className="text-lg font-semibold text-text-primary">HouseCrew</div>
       </div>
-
       {/* Right side */}
       <div className="flex items-center gap-3">
         {/* Notifications */}
-        <NotificationButton hasUnreadNotifications={hasUnreadNotifications} />
-
+        <NotificationButton
+          hasUnreadNotifications={hasUnreadNotifications}
+          areNotificationsOpen={areNotificationsOpen}
+          handleNotificationsToggle={handleNotificationsToggle}
+        />
         {/* User profile */}
         <UserMenu
           username={username}

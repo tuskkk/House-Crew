@@ -1,18 +1,21 @@
-import { Link } from "react-router";
 import { Bell } from "lucide-react";
+import NotificationsDropdown from "./NotificationsDropdown";
 
 interface NotificationButtonProps {
   hasUnreadNotifications?: boolean;
+  areNotificationsOpen?: boolean;
+  handleNotificationsToggle: () => void;
 }
 
 export default function NotificationButton({
   hasUnreadNotifications = false,
+  areNotificationsOpen,
+  handleNotificationsToggle,
 }: NotificationButtonProps) {
   return (
-    <>
-      {/* temporary solution: show dropdown instead of navigating */}
-      <Link
-        to="/notifications"
+    <div className="relative">
+      <button
+        onClick={handleNotificationsToggle}
         aria-label={
           hasUnreadNotifications ? "Notifications, unread" : "Notifications"
         }
@@ -25,7 +28,13 @@ export default function NotificationButton({
             className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-primary"
           />
         )}
-      </Link>
-    </>
+      </button>
+      {areNotificationsOpen && (
+        <NotificationsDropdown
+          notifications={[]}
+          handleNotificationsToggle={handleNotificationsToggle}
+        />
+      )}
+    </div>
   );
 }
