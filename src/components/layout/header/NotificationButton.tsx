@@ -10,6 +10,7 @@ export default function NotificationButton({
 }: NotificationButtonProps) {
   return (
     <>
+      {/* temporary solution: show dropdown instead of navigating */}
       <Link
         to="/notifications"
         aria-label={
