@@ -4,10 +4,10 @@ import {
   ChartNoAxesColumn,
   CheckSquare,
   LayoutDashboard,
-  Menu,
   Settings,
   X,
 } from "lucide-react";
+import Logo from "../common/Logo";
 
 const navigation = [
   {
@@ -61,8 +61,8 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
         }`}
       >
         {/* Logo */}
-        <div className="flex h-16 shrink-0 items-center justify-between border-b border-border px-6">
-          <span className="text-xl font-bold text-primary">HouseCrew</span>
+        <div className="flex h-16 shrink-0 items-center justify-between border-b border-border px-3">
+          <Logo />
 
           {/* Mobile close button */}
           <button

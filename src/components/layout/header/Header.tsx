@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu } from "lucide-react";
 import NotificationButton from "./NotificationButton";
 import UserMenu from "./UserMenu";
+import Logo from "../../common/Logo";
 
 interface HeaderProps {
   username?: string;
@@ -41,7 +42,7 @@ export default function Header({
   };
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-border bg-background px-4 md:px-6">
+    <header className="flex h-16 items-center justify-between border-b border-border bg-background px-4 lg:px-6">
       {/* Left side */}
       <div className="flex items-center gap-3">
         {/* Mobile menu button */}
@@ -49,13 +50,16 @@ export default function Header({
           type="button"
           onClick={onMenuClick}
           aria-label="Open navigation menu"
-          className="rounded-md p-2 text-text-secondary transition hover:bg-surface hover:text-text-primary md:hidden"
+          className="rounded-md p-2 text-text-secondary transition hover:bg-surface hover:text-text-primary lg:hidden"
         >
           <Menu size={22} />
         </button>
 
-        {/* Page title / logo */}
-        <div className="text-lg font-semibold text-text-primary">HouseCrew</div>
+        {/* todo: Page breadcrumb / logo */}
+        <div className="text-lg font-semibold text-text-primary hidden lg:block">
+          Breadcrumb*
+        </div>
+        <Logo className="lg:hidden" />
       </div>
       {/* Right side */}
       <div className="flex items-center gap-3">
