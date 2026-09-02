@@ -12,7 +12,7 @@ const Logo = ({ className }: LogoProps) => {
       <picture>
         <source media="(min-width: 768px)" srcSet={logoDesktop} />
 
-        <img src={logoMobile} alt="HouseCrew" className="h-10 w-auto" />
+        <img src={logoMobile} alt="HouseCrew" className="h-8 w-auto md:h-10" />
       </picture>
     </Link>
   );

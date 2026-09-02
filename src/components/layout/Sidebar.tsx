@@ -61,7 +61,7 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
         }`}
       >
         {/* Logo */}
-        <div className="flex h-16 shrink-0 items-center justify-between border-b border-border px-3">
+        <div className="flex h-16 shrink-0 items-center justify-between border-b border-border px-3 bg-gradient-to-b from-background to-white">
           <Logo />
 
           {/* Mobile close button */}
