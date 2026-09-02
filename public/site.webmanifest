@@ -1,0 +1,21 @@
+{
+  "name": "HouseCrew",
+  "short_name": "HouseCrew",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png?v=20260902",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png?v=20260902",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#92140c",
+  "background_color": "#fff8f0",
+  "display": "standalone"
+}
