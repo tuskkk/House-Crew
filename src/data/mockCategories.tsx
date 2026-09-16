@@ -1,0 +1,17 @@
+export const categories = [
+  { id: "1", name: "Bathroom" },
+  { id: "2", name: "Kitchen" },
+  { id: "3", name: "Bedroom" },
+  { id: "4", name: "Living room" },
+  { id: "5", name: "Terrace" },
+  { id: "6", name: "Hall" },
+  { id: "7", name: "Pantry" },
+  { id: "8", name: "Cupboard" },
+  { id: "9", name: "Bay" },
+  { id: "10", name: "Garrage" },
+  { id: "11", name: "Shopping" },
+  { id: "12", name: "Cooking" },
+  { id: "13", name: "Child care" },
+  { id: "14", name: "Laundry" },
+  { id: "15", name: "General" },
+];
