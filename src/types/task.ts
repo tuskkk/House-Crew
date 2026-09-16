@@ -1,14 +1,11 @@
+import type { Category } from "./category";
+
 /*type TaskPersonDetails = {
   id: string;
   name: string;
   email: string;
   startDate: string;
 }*/
-
-type Category = {
-  id: string;
-  name: string;
-};
 
 type TimePeriodValues = {
   day?: number;
