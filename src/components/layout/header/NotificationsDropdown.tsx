@@ -1,10 +1,10 @@
 import { Link } from "react-router";
 import { Bell } from "lucide-react";
 import Dropdown from "../../ui/Dropdown";
-import type { NotificationType } from "../../../types/notification";
+import type { Notification } from "../../../types/notification";
 
 interface NotificationsDropdownProps {
-  notifications?: NotificationType[];
+  notifications?: Notification[];
   handleNotificationsToggle: () => void;
 }
 
