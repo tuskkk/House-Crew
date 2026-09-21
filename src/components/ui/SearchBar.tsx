@@ -22,7 +22,7 @@ const SearchBar = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex h-11 w-full max-w-md overflow-hidden rounded-sm border border-disabled bg-white"
+      className="flex h-11.5 max-w-md overflow-hidden rounded-sm border border-disabled bg-white"
     >
       <input
         type="search"
@@ -35,7 +35,7 @@ const SearchBar = ({
       <button
         type="submit"
         aria-label="Search tasks"
-        className="flex w-12 shrink-0 items-center justify-center bg-accent text-white transition-colors hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"
+        className="flex w-12 shrink-0 items-center justify-center bg-accent text-white transition-colors cursor-pointer hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"
       >
         <Search size={20} strokeWidth={2} aria-hidden="true" />
       </button>

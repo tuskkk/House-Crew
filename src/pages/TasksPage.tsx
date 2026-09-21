@@ -1,7 +1,9 @@
 import { PageTitle } from "../components/ui/PageTitle";
 import { mockTasks } from "../data/mockTasks";
 import SearchBar from "../components/ui/SearchBar";
+import Button from "../components/ui/Button";
 import { useTasks } from "../store/tasksStore";
+import { Plus } from "lucide-react";
 
 /* export interface TasksPage.Props {
   prop?: string;
@@ -21,6 +23,17 @@ export default function TasksPage(
             placeholder="Search Tasks..."
             query={searchQuery}
             setQuery={setSearchQuery}
+          />
+          <Button
+            text="Add Task"
+            children={
+              <Plus
+                size={20}
+                color="white"
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+            }
           />
         </div>
         <div className="px-7 py-4">
