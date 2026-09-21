@@ -1,5 +1,7 @@
-// import styles from "./TasksPage.css";
+import { PageTitle } from "../components/ui/PageTitle";
 import { mockTasks } from "../data/mockTasks";
+import SearchBar from "../components/ui/SearchBar";
+import { useTasks } from "../store/tasksStore";
 
 /* export interface TasksPage.Props {
   prop?: string;
@@ -8,14 +10,28 @@ import { mockTasks } from "../data/mockTasks";
 export default function TasksPage(
   /*{prop = 'default value'}: TasksPage.Props*/
 ) {
+  const searchQuery = useTasks((state) => state.searchQuery);
+  const setSearchQuery = useTasks((state) => state.setSearchQuery);
   return (
-    <div>
-      {mockTasks.map((task) => (
-        <div key={task.id}>
-          <h2>{task.name}</h2>
-          <p>{task.category.name}</p>
+    <div className="w-full">
+      <PageTitle name="Tasks" />
+      <section className="bg-white rounded-sm shadow border-disabled">
+        <div className="w-full flex items-center justify-between gap-4 border-b border-b-disabled px-7 py-4">
+          <SearchBar
+            placeholder="Search Tasks..."
+            query={searchQuery}
+            setQuery={setSearchQuery}
+          />
         </div>
-      ))}
+        <div className="px-7 py-4">
+          {mockTasks.map((task) => (
+            <div key={task.id}>
+              <h2>{task.name}</h2>
+              <p>{task.category.name}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
