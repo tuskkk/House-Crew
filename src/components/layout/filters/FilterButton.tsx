@@ -41,6 +41,8 @@ export default function FilterButton({
       {/*(isFilterOpen && !isDisabled) &&(
         <FilterDropdown
           categoryName={categoryName}
+          options={options}
+          selectedOptions={selectedOptions}
           onOptionClick={onOptionClick}
           handleFilterToggle={handleFilterToggle}
         />

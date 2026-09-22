@@ -14,6 +14,8 @@ export default function TasksPage(
 ) {
   const searchQuery = useTasks((state) => state.searchQuery);
   const setSearchQuery = useTasks((state) => state.setSearchQuery);
+  const categoryFiltersChosen = useTasks((state) => state.categoryFilters);
+  const setCategoryFilters = useTasks((state) => state.setCategoryFilters);
   return (
     <div className="w-full">
       <PageTitle name="Tasks" />
