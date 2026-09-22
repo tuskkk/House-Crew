@@ -1,16 +1,20 @@
-interface ButtonProps {
-  text: string;
+import type { ButtonHTMLAttributes } from "react";
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
-  className?: string;
 }
 
-export default function Button({ text, children, className }: ButtonProps) {
+const Button = ({ children, ...props }: ButtonProps) => {
   return (
     <button
-      className={`flex items-center justify-center min-w-16 rounded bg-primary px-4 py-3 shadow cursor-pointer hover:bg-primary-hover lg:px-5 lg: py-3.5 ${className || ""}`}
+      type="button"
+      className={`min-w-16 rounded px-4 py-3 shadow lg:px-5 lg:py-3.5
+       ${props.disabled ? "bg-disabled text-text-disabled cursor-not-allowed" : "bg-primary text-white cursor-pointer hover:bg-primary-hover"}`}
+      disabled={props.disabled}
     >
       {children}
-      <span className="pl-1 text-sm tracking-wide text-white">{text}</span>
     </button>
   );
-}
+};
+
+export default Button;

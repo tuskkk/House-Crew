@@ -25,17 +25,20 @@ export default function TasksPage(
             setQuery={setSearchQuery}
           />
           <Button
-            text="Add Task"
             children={
-              <Plus
-                size={20}
-                color="white"
-                strokeWidth={2}
-                aria-hidden="true"
-              />
+              <div className="flex items-center justify-center gap-1">
+                <Plus
+                  size={20}
+                  color="white"
+                  strokeWidth={2}
+                  aria-hidden="true"
+                />
+                <span className="text-sm tracking-wide">Add Task</span>
+              </div>
             }
           />
         </div>
+        <div className="w-full flex items-center justify-start gap-4 border-b border-b-disabled px-7 py-4"></div>
         <div className="px-7 py-4">
           {mockTasks.map((task) => (
             <div key={task.id}>
