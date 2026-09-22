@@ -2,8 +2,10 @@ import { PageTitle } from "../components/ui/PageTitle";
 import { mockTasks } from "../data/mockTasks";
 import SearchBar from "../components/ui/SearchBar";
 import Button from "../components/ui/Button";
+import FilterButton from "../components/layout/filters/FilterButton";
 import { useTasks } from "../store/tasksStore";
 import { Plus } from "lucide-react";
+import { categories } from "../data/mockCategories";
 
 /* export interface TasksPage.Props {
   prop?: string;
@@ -14,7 +16,9 @@ export default function TasksPage(
 ) {
   const searchQuery = useTasks((state) => state.searchQuery);
   const setSearchQuery = useTasks((state) => state.setSearchQuery);
-  const categoryFiltersChosen = useTasks((state) => state.categoryFilters);
+  const categoryFiltersChosen = useTasks(
+    (state) => state.categoryFiltersChosen,
+  );
   const setCategoryFilters = useTasks((state) => state.setCategoryFilters);
   return (
     <div className="w-full">
@@ -40,7 +44,14 @@ export default function TasksPage(
             }
           />
         </div>
-        <div className="w-full flex items-center justify-start gap-4 border-b border-b-disabled px-7 py-4"></div>
+        <div className="w-full flex items-center justify-start gap-4 border-b border-b-disabled px-7 py-4">
+          <FilterButton
+            filterName="Category"
+            options={categories}
+            selectedOptions={categoryFiltersChosen}
+            submitOptions={setCategoryFilters}
+          />
+        </div>
         <div className="px-7 py-4">
           {mockTasks.map((task) => (
             <div key={task.id}>

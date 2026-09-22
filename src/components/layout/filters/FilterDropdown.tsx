@@ -1,18 +1,16 @@
 import { Check } from "lucide-react";
 import Dropdown from "../../ui/Dropdown";
 import Button from "../../ui/Button";
-import type { Task } from "../../../types/task";
+import type { Category } from "../../../types/category";
 import { useState } from "react";
 
 interface FilterDropdownProps {
-  categoryName: string;
-  options: Task[];
+  options: Category[];
   selectedOptions: string[];
   handleSubmitFilters: (options: string[]) => void;
 }
 
 export default function FilterDropdown({
-  categoryName,
   options,
   selectedOptions,
   handleSubmitFilters,
@@ -27,26 +25,35 @@ export default function FilterDropdown({
     }
   };
   return (
-    <Dropdown>
-      {options.map((option) => (
-        <button
-          type="button"
-          className="flex items-center gap-2 px-3 py-2 text-sm text-text-primary transition hover:bg-secondary"
-          onClick={() => handleOptionClick(option.id)}
+    <Dropdown className="-left-6 flex h-80 flex-col overflow-hidden">
+      <div className="relative flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent">
+        {options.map((option) => (
+          <button
+            key={option.id}
+            type="button"
+            className="flex w-full items-center gap-2 rounded-sm px-3 py-2 text-sm text-text-primary transition hover:bg-secondary"
+            onClick={() => handleOptionClick(option.id)}
+          >
+            <Check
+              size={16}
+              className={
+                optionsChosen.includes(option.id) ? "visible" : "invisible"
+              }
+            />
+            <span>{option.name}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="shrink-0 border-t border-disabled p-2">
+        <Button
+          className="w-full py-2"
+          onClick={() => handleSubmitFilters(optionsChosen)}
+          version="secondary"
         >
-          {optionsChosen.includes(categoryName) && (
-            <Check size={16} className="text-primary" />
-          )}
-          <span>{option.name}</span>
-        </button>
-      ))}
-      <Button
-        className="w-full"
-        onClick={() => handleSubmitFilters(optionsChosen)}
-        version="secondary"
-      >
-        Done
-      </Button>
+          Done
+        </Button>
+      </div>
     </Dropdown>
   );
 }
