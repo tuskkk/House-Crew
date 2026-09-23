@@ -1,4 +1,4 @@
-import type { Category } from "./category";
+import type { TaskCategoryItem } from "./category";
 
 /*type TaskPersonDetails = {
   id: string;
@@ -33,10 +33,7 @@ type TaskDetails = {
   statisticsDetails: TaskStatisticsDetails;
 };
 
-type Task = {
-  id: string;
-  category: Category;
-  name: string;
+type Task = TaskCategoryItem & {
   details: TaskDetails;
 };
 

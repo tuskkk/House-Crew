@@ -3,10 +3,17 @@ type Category = {
   name: string;
 };
 
+type TaskCategoryItem = {
+  id: string;
+  category: Category;
+  name: string;
+};
+
 type TaskCategoryData = {
   id: string;
   name: string;
-  tasks: string[];
+  initiallyOpen?: boolean;
+  tasks: TaskCategoryItem[];
 };
 
-export type { Category, TaskCategoryData };
+export type { Category, TaskCategoryItem, TaskCategoryData };
