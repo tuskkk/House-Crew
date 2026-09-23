@@ -3,6 +3,7 @@ import { mockTasks } from "../data/mockTasks";
 import SearchBar from "../components/ui/SearchBar";
 import Button from "../components/ui/Button";
 import FilterButton from "../components/layout/filters/FilterButton";
+import TasksList from "../components/layout/tasks/TasksList";
 import { useTasks } from "../store/tasksStore";
 import { Plus } from "lucide-react";
 import { categories } from "../data/mockCategories";
@@ -52,14 +53,7 @@ export default function TasksPage(
             submitOptions={setCategoryFilters}
           />
         </div>
-        <div className="px-7 py-4">
-          {mockTasks.map((task) => (
-            <div key={task.id}>
-              <h2>{task.name}</h2>
-              <p>{task.category.name}</p>
-            </div>
-          ))}
-        </div>
+        <TasksList />
       </section>
     </div>
   );
