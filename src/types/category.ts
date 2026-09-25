@@ -13,7 +13,7 @@ type TaskCategoryData = {
   id: string;
   name: string;
   initiallyOpen?: boolean;
-  tasks: TaskCategoryItem[];
+  tasks: TaskCategoryItem[] | [];
 };
 
 export type { Category, TaskCategoryItem, TaskCategoryData };

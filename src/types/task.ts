@@ -37,4 +37,7 @@ type Task = TaskCategoryItem & {
   details: TaskDetails;
 };
 
-export type { Task, TaskDetails };
+type ModalType =
+  "addCategory" | "taskDetails" | "editTask" | "deleteTask" | null;
+
+export type { Task, TaskDetails, ModalType };
