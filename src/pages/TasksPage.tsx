@@ -1,12 +1,15 @@
 import { PageTitle } from "../components/ui/PageTitle";
-import { mockTasks } from "../data/mockTasks";
 import SearchBar from "../components/ui/SearchBar";
 import Button from "../components/ui/Button";
 import FilterButton from "../components/layout/filters/FilterButton";
 import TasksList from "../components/layout/tasks/TasksList";
+import Modal from "../components/ui/Modal";
+import AddCategoryForm from "../components/layout/tasks/AddCategoryForm";
+import { useState } from "react";
 import { useTasks } from "../store/tasksStore";
 import { Plus } from "lucide-react";
 import { categories } from "../data/mockCategories";
+import type { ModalType } from "../types/task";
 
 /* export interface TasksPage.Props {
   prop?: string;
@@ -15,6 +18,8 @@ import { categories } from "../data/mockCategories";
 export default function TasksPage(
   /*{prop = 'default value'}: TasksPage.Props*/
 ) {
+  const [activeModal, setActiveModal] = useState<ModalType>(null);
+
   const searchQuery = useTasks((state) => state.searchQuery);
   const setSearchQuery = useTasks((state) => state.setSearchQuery);
   const categoryFiltersChosen = useTasks(
@@ -56,6 +61,7 @@ export default function TasksPage(
           </div>
           <Button
             className="w-48 whitespace-nowrap"
+            onClick={() => setActiveModal("addCategory")}
             children={
               <div className="flex items-center justify-center gap-1">
                 <Plus
@@ -71,6 +77,11 @@ export default function TasksPage(
         </div>
         <TasksList />
       </section>
+      {activeModal === "addCategory" && (
+        <Modal title="Add New Category" onClose={() => setActiveModal(null)}>
+          <AddCategoryForm closeForm={() => setActiveModal(null)} />
+        </Modal>
+      )}
     </div>
   );
 }
