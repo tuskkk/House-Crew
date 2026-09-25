@@ -45,12 +45,28 @@ export default function TasksPage(
             }
           />
         </div>
-        <div className="w-full flex items-center justify-start gap-4 border-b border-b-disabled px-7 py-4">
-          <FilterButton
-            filterName="Category"
-            options={categories}
-            selectedOptions={categoryFiltersChosen}
-            submitOptions={setCategoryFilters}
+        <div className="flex items-center justify-between gap-4 border-b border-b-disabled px-7 py-4">
+          <div className="w-full flex items-center justify-start gap-4">
+            <FilterButton
+              filterName="Category"
+              options={categories}
+              selectedOptions={categoryFiltersChosen}
+              submitOptions={setCategoryFilters}
+            />
+          </div>
+          <Button
+            className="w-48 whitespace-nowrap"
+            children={
+              <div className="flex items-center justify-center gap-1">
+                <Plus
+                  size={20}
+                  color="white"
+                  strokeWidth={2}
+                  aria-hidden="true"
+                />
+                <span className="text-sm tracking-wide">Add Category</span>
+              </div>
+            }
           />
         </div>
         <TasksList />
