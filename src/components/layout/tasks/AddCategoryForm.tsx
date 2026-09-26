@@ -3,12 +3,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Button from "../../ui/Button";
 import Input from "../../ui/Input";
+import { useTasks } from "../../../store/tasksStore";
 
 type AddCategoryFormProps = {
   closeForm: () => void;
 };
 
 const AddCategoryForm = ({ closeForm }: AddCategoryFormProps) => {
+  const addCategory = useTasks((state) => state.addCategory);
+
   const categorySchema = z.object({
     name: z
       .string()
@@ -26,8 +29,13 @@ const AddCategoryForm = ({ closeForm }: AddCategoryFormProps) => {
     resolver: zodResolver(categorySchema),
   });
 
-  const onSubmit = () => {
-    alert("Category added");
+  const onSubmit = (data: AddCategoryFormData) => {
+    addCategory({
+      id: crypto.randomUUID(),
+      name: data.name,
+      tasks: [],
+    });
+
     closeForm();
   };
 
