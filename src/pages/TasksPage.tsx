@@ -5,27 +5,30 @@ import FilterButton from "../components/layout/filters/FilterButton";
 import TasksList from "../components/layout/tasks/TasksList";
 import Modal from "../components/ui/Modal";
 import AddCategoryForm from "../components/layout/tasks/AddCategoryForm";
-import { useState } from "react";
+import AddTaskForm from "../components/layout/tasks/AddTaskForm";
+import { useState, useMemo } from "react";
 import { useTasks } from "../store/tasksStore";
 import { Plus } from "lucide-react";
-import { categories } from "../data/mockCategories";
 import type { ModalType } from "../types/task";
 
-/* export interface TasksPage.Props {
-  prop?: string;
-} */
-
-export default function TasksPage(
-  /*{prop = 'default value'}: TasksPage.Props*/
-) {
+export default function TasksPage() {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
 
+  const tasksList = useTasks((state) => state.tasksList);
   const searchQuery = useTasks((state) => state.searchQuery);
   const setSearchQuery = useTasks((state) => state.setSearchQuery);
   const categoryFiltersChosen = useTasks(
     (state) => state.categoryFiltersChosen,
   );
   const setCategoryFilters = useTasks((state) => state.setCategoryFilters);
+  const categories = useMemo(
+    () =>
+      tasksList.map(({ id, name }) => ({
+        id,
+        name,
+      })),
+    [tasksList],
+  );
   return (
     <div className="w-full">
       <PageTitle name="Tasks" />
@@ -37,6 +40,7 @@ export default function TasksPage(
             setQuery={setSearchQuery}
           />
           <Button
+            onClick={() => setActiveModal("addTask")}
             children={
               <div className="flex items-center justify-center gap-1">
                 <Plus
@@ -80,6 +84,14 @@ export default function TasksPage(
       {activeModal === "addCategory" && (
         <Modal title="Add New Category" onClose={() => setActiveModal(null)}>
           <AddCategoryForm closeForm={() => setActiveModal(null)} />
+        </Modal>
+      )}
+      {activeModal === "addTask" && (
+        <Modal title="Add New Task" onClose={() => setActiveModal(null)}>
+          <AddTaskForm
+            categoriesList={categories}
+            closeForm={() => setActiveModal(null)}
+          />
         </Modal>
       )}
     </div>
