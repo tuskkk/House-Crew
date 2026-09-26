@@ -1,11 +1,24 @@
 import type { TaskCategoryItem } from "./category";
 
-/*type TaskPersonDetails = {
+type TaskPersonDetails = {
   id: string;
   name: string;
   email: string;
   startDate: string;
-}*/
+};
+
+export const cycleOptions = [
+  "daily",
+  "weekly",
+  "fortnightly",
+  "monthly",
+  "quarterly",
+  "yearly",
+] as const;
+export const priorityOptions = ["low", "medium", "high"] as const;
+
+type Cycle = (typeof cycleOptions)[number];
+type Priority = (typeof priorityOptions)[number];
 
 type TimePeriodValues = {
   day?: number;
@@ -25,10 +38,9 @@ type TaskStatisticsDetails = {
 };
 
 type TaskDetails = {
-  cycleDetails?:
-    "daily" | "weekly" | "fortnightly" | "monthly" | "quarterly" | "yearly";
+  cycleDetails?: Cycle;
   dueDate: string | null;
-  priority: "low" | "medium" | "high" | null;
+  priority: Priority | null;
   assigneeId: string | null;
   statisticsDetails: TaskStatisticsDetails;
 };
@@ -37,7 +49,13 @@ type Task = TaskCategoryItem & {
   details: TaskDetails;
 };
 
-type ModalType =
-  "addCategory" | "taskDetails" | "editTask" | "deleteTask" | null;
+type ModalType = "addCategory" | "addTask" | "editTask" | "deleteTask" | null;
 
-export type { Task, TaskDetails, ModalType };
+export type {
+  TaskPersonDetails,
+  Cycle,
+  Priority,
+  Task,
+  TaskDetails,
+  ModalType,
+};
