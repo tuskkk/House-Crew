@@ -42,7 +42,7 @@ export default function Header({
   };
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-border bg-background px-4 lg:px-6">
+    <header className="flex h-16 items-center justify-between border-b border-border bg-background md:px-2 lg:px-6">
       {/* Left side */}
       <div className="flex items-center gap-3">
         {/* Mobile menu button */}

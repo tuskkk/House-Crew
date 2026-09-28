@@ -18,7 +18,7 @@ const Input = ({ label, error, id, className = "", ...props }: InputProps) => {
       </label>
       <input
         id={inputId}
-        className={`h-13 w-full border border-disabled bg-white px-4 text-sm text-text-primary outline-none placeholder:text-text-secondary focus:border-primary focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:bg-disabled ${error ? "border-overdue" : ""} ${className}`}
+        className={`h-12 w-full border border-disabled bg-white px-2 text-sm text-text-primary outline-none placeholder:text-text-secondary focus:border-primary focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:bg-disabled md:px-4 ${error ? "border-overdue" : ""} ${className}`}
         {...props}
       />
       {error && <span className="w-full text-xs text-overdue">{error}</span>}

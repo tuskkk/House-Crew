@@ -2,6 +2,7 @@ import { Search } from "lucide-react";
 import type { SubmitEvent } from "react";
 
 interface SearchBarProps {
+  className: string;
   query: string;
   setQuery: (query: string) => void;
   onSearch?: (query: string) => void;
@@ -9,6 +10,7 @@ interface SearchBarProps {
 }
 
 const SearchBar = ({
+  className,
   onSearch,
   placeholder,
   query,
@@ -22,7 +24,7 @@ const SearchBar = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex h-11.5 max-w-md overflow-hidden rounded-sm border border-disabled bg-white"
+      className={`flex h-11.5 max-w-md overflow-hidden rounded-sm border border-disabled bg-white ${className || ""}`}
     >
       <input
         type="search"

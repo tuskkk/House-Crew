@@ -19,7 +19,7 @@ export default function TasksList() {
   );
 
   return (
-    <div className="px-7 py-4">
+    <div className="px-3 py-4 lg:px-7">
       {filteredTasksList.map((categoryObject: TaskCategoryData) => (
         <Accordion
           key={categoryObject.id}

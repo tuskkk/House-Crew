@@ -28,7 +28,7 @@ export default function FilterButton({
   return (
     <div className="relative w-full">
       <Button
-        className="w-36"
+        className="md:w-36"
         onClick={() => setIsFilterOpen((prev) => !prev)}
         aria-expanded={isFilterOpen}
         aria-haspopup="menu"
@@ -36,11 +36,7 @@ export default function FilterButton({
       >
         <div className="flex items-center justify-center gap-1">
           <span className="text-sm font-medium">{filterName}</span>
-          {isFilterOpen ? (
-            <ChevronUp size={16} className="hidden sm:block" />
-          ) : (
-            <ChevronDown size={16} className="hidden sm:block" />
-          )}
+          {isFilterOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </div>
       </Button>
       {isFilterOpen && !isDisabled && (

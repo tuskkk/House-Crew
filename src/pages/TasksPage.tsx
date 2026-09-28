@@ -33,8 +33,9 @@ export default function TasksPage() {
     <div className="w-full">
       <PageTitle name="Tasks" />
       <section className="bg-white rounded-sm shadow border-disabled">
-        <div className="w-full flex items-center justify-between gap-4 border-b border-b-disabled px-7 py-4">
+        <div className="w-full flex flex-col items-start justify-between gap-4 border-b border-b-disabled px-3 py-4 sm:flex-row lg:px-7">
           <SearchBar
+            className="w-full sm:w-auto"
             placeholder="Search Tasks..."
             query={searchQuery}
             setQuery={setSearchQuery}
@@ -54,8 +55,8 @@ export default function TasksPage() {
             }
           />
         </div>
-        <div className="flex items-center justify-between gap-4 border-b border-b-disabled px-7 py-4">
-          <div className="w-full flex items-center justify-start gap-4">
+        <div className="flex items-center justify-between gap-2 border-b border-b-disabled px-3 py-4 md:gap-4 lg:px-7">
+          <div className="flex items-center justify-start flex-1 gap-2 md:gap-4">
             <FilterButton
               filterName="Category"
               options={categories}
@@ -64,7 +65,7 @@ export default function TasksPage() {
             />
           </div>
           <Button
-            className="w-48 whitespace-nowrap"
+            className="whitespace-nowrap"
             onClick={() => setActiveModal("addCategory")}
             children={
               <div className="flex items-center justify-center gap-1">

@@ -44,7 +44,7 @@ const AddCategoryForm = ({ closeForm }: AddCategoryFormProps) => {
       className="w-full flex items-center justify-between gap-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="h-27 flex-1">
+      <div className="h-26 flex-1">
         <Input label="New category name" {...register("name")} />
         <p className="h-4 text-xs text-overdue pt-1.5">
           {errors.name && errors.name.message}

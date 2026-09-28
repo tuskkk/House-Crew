@@ -30,22 +30,26 @@ const AddTaskForm = ({ closeForm, categoriesList }: AddTaskFormProps) => {
     (priorityOption: Priority) =>
       mapSelectOptions(priorityOption, priorityOption),
   );
-  const usersSelectOptions = mockUsers.map((user: TaskPersonDetails) =>
-    mapSelectOptions(user.name, user.id),
-  );
+  const usersSelectOptions = [
+    { label: "None", value: "" },
+    ...mockUsers.map((user: TaskPersonDetails) =>
+      mapSelectOptions(user.name, user.id),
+    ),
+  ];
 
   const taskSchema = z.object({
     category: z.enum(categoryIds),
     name: z
       .string()
-      .nonempty()
       .min(3, "Task name must contain at least 3 characters")
       .max(32, "Task name is too long"),
     cycleDetails: z.enum(cycleOptions).optional(),
     dueDate: z
       .string()
-      .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date")
-      .optional(),
+      .refine(
+        (value) => value === "" || /^\d{4}-\d{2}-\d{2}$/.test(value),
+        "Invalid date",
+      ),
     priority: z.enum(priorityOptions).nullable(),
     assigneeId: z.string().nullable(),
   });
@@ -97,55 +101,53 @@ const AddTaskForm = ({ closeForm, categoriesList }: AddTaskFormProps) => {
       className="w-full flex flex-col gap-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="h-27">
-        <Select
-          label="Category"
-          options={categorySelectOptions}
-          {...register("category")}
-        />
-        <p className="h-4 text-xs text-overdue pt-1.5">
-          {errors.category && errors.category.message}
-        </p>
-      </div>
-
-      <div className="h-27">
-        <Input label="Task name" {...register("name")} />
+      <div className="h-21">
+        <Input label="Task name *" {...register("name")} />
         <p className="h-4 text-xs text-overdue pt-1.5">
           {errors.name && errors.name.message}
         </p>
       </div>
-
-      <div className="h-27">
-        <Select
-          label="Cycle"
-          options={cycleSelectOptions}
-          {...register("cycleDetails")}
-        />
-        <p className="h-4 text-xs text-overdue pt-1.5">
-          {errors.cycleDetails && errors.cycleDetails.message}
-        </p>
+      <div className="h-21 flex items-center justify-between gap-4">
+        <div className="flex-1">
+          <Select
+            label="Category *"
+            options={categorySelectOptions}
+            {...register("category")}
+          />
+          <p className="h-4 text-xs text-overdue pt-1.5">
+            {errors.category && errors.category.message}
+          </p>
+        </div>
+        <div className="flex-1">
+          <Select
+            label="Cycle"
+            options={cycleSelectOptions}
+            {...register("cycleDetails")}
+          />
+          <p className="h-4 text-xs text-overdue pt-1.5">
+            {errors.cycleDetails && errors.cycleDetails.message}
+          </p>
+        </div>
       </div>
-
-      <div className="h-27">
-        {/* Implement calendar */}
-        <Input type="date" label="Due date" {...register("dueDate")} />
-        <p className="h-4 text-xs text-overdue pt-1.5">
-          {errors.dueDate && errors.dueDate.message}
-        </p>
+      <div className="h-21 flex items-center justify-between gap-4">
+        <div className="flex-1">
+          <Input type="date" label="Due date" {...register("dueDate")} />
+          <p className="h-4 text-xs text-overdue pt-1.5">
+            {errors.dueDate && errors.dueDate.message}
+          </p>
+        </div>
+        <div className="flex-1">
+          <Select
+            label="Priority"
+            options={prioritySelectOptions}
+            {...register("priority")}
+          />
+          <p className="h-4 text-xs text-overdue pt-1.5">
+            {errors.priority && errors.priority.message}
+          </p>
+        </div>
       </div>
-
-      <div className="h-27">
-        <Select
-          label="Priority"
-          options={prioritySelectOptions}
-          {...register("priority")}
-        />
-        <p className="h-4 text-xs text-overdue pt-1.5">
-          {errors.priority && errors.priority.message}
-        </p>
-      </div>
-
-      <div className="h-27">
+      <div className="h-21">
         <Select
           label="Assignee"
           options={usersSelectOptions}
@@ -155,9 +157,11 @@ const AddTaskForm = ({ closeForm, categoriesList }: AddTaskFormProps) => {
           {errors.assigneeId && errors.assigneeId.message}
         </p>
       </div>
-
-      <div className="flex justify-end pt-2">
-        <Button type="submit">Save</Button>
+      <div className="flex items-start justify-between pt-2">
+        <span className="text-text-primary text-sm">* - required</span>
+        <Button type="submit" className="w-28">
+          Save
+        </Button>
       </div>
     </form>
   );
