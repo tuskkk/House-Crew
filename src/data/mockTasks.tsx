@@ -946,7 +946,7 @@ const frequencyOptions = [
 const priorityOptions = ["low", "medium", "high"] as const;
 
 export const mockTasks: Task[] = categories.flatMap((category, categoryIndex) =>
-  category.tasks.map((name, taskIndex): Task => {
+  category.tasks.map((task, taskIndex): Task => {
     const taskNumber = categoryIndex * 100 + taskIndex + 1;
 
     return {
@@ -955,7 +955,7 @@ export const mockTasks: Task[] = categories.flatMap((category, categoryIndex) =>
         id: category.id,
         name: category.name,
       },
-      name,
+      name: task.name,
       details: {
         cycleDetails:
           taskIndex % 5 === 0
