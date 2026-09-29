@@ -18,6 +18,12 @@
   --color-pending: #c27a00;
   --color-success: #4f772d;
   --color-disabled: #d6d2cd;
+  --color-success-100: #dbe8cf;
+  --color-success-600: #355019;
+  --color-pending-100: #fde7cc;
+  --color-pending-600: #8a4b00;
+  --color-overdue-100: #eec4bb;
+  --color-overdue-600: #7f1d16;
 
   /* layout widths */
   --layout-width: 290px;
