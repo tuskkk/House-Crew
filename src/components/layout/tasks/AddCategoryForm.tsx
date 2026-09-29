@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Button from "../../ui/Button";
 import Input from "../../ui/Input";
+import AlertModel from "../../ui/alerts/AlertModel";
 import { useTasks } from "../../../store/tasksStore";
 
 type AddCategoryFormProps = {
@@ -10,6 +12,8 @@ type AddCategoryFormProps = {
 };
 
 const AddCategoryForm = ({ closeForm }: AddCategoryFormProps) => {
+  const [isSuccessShown, setIsSuccessShown] = useState<boolean>(false);
+
   const addCategory = useTasks((state) => state.addCategory);
 
   const categorySchema = z.object({
@@ -35,23 +39,34 @@ const AddCategoryForm = ({ closeForm }: AddCategoryFormProps) => {
       name: data.name,
       tasks: [],
     });
-
-    closeForm();
+    setIsSuccessShown(true);
+    setTimeout(() => {
+      closeForm();
+    }, 3000);
   };
 
   return (
-    <form
-      className="w-full flex items-center justify-between gap-4"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className="h-26 flex-1">
-        <Input label="New category name" {...register("name")} />
-        <p className="h-4 text-xs text-overdue pt-1.5">
-          {errors.name && errors.name.message}
-        </p>
-      </div>
-      <Button type="submit">Save</Button>
-    </form>
+    <>
+      {isSuccessShown ? (
+        <AlertModel
+          alertType="success"
+          title="New category has been added successfully"
+        />
+      ) : (
+        <form
+          className="w-full flex items-center justify-between gap-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="h-26 flex-1">
+            <Input label="New category name" {...register("name")} />
+            <p className="h-4 text-xs text-overdue pt-1.5">
+              {errors.name && errors.name.message}
+            </p>
+          </div>
+          <Button type="submit">Save</Button>
+        </form>
+      )}
+    </>
   );
 };
 
