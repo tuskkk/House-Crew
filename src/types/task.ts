@@ -51,6 +51,11 @@ type Task = TaskCategoryItem & {
 
 type ModalType = "addCategory" | "addTask" | "editTask" | "deleteTask" | null;
 
+type TaskSuccessData = {
+  isSuccessShown: boolean;
+  taskName: string | null;
+};
+
 export type {
   TaskPersonDetails,
   Cycle,
@@ -58,4 +63,5 @@ export type {
   Task,
   TaskDetails,
   ModalType,
+  TaskSuccessData,
 };
