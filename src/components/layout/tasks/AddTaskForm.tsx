@@ -109,17 +109,18 @@ const AddTaskForm = ({ closeForm, categoriesList }: AddTaskFormProps) => {
       isSuccessShown: true,
       taskName: data.name,
     });
-    setTimeout(() => {
+    /*setTimeout(() => {
       closeForm();
-    }, 3000);
+    }, 5000);*/
   };
 
   return (
     <>
       {successData.isSuccessShown ? (
         <AlertModel
-          alertType="success"
+          alertType="info"
           title={`The new task ${successData.taskName} has been added successfully`}
+          description="Lorem ipsum ruihtuer poef i hbfhsfb uw efhkje dhjsagdfjagjfhdhfd jadfhfh dsfjbsdh a dshfhs s d eusvhfu"
         />
       ) : (
         <form
@@ -190,7 +191,6 @@ const AddTaskForm = ({ closeForm, categoriesList }: AddTaskFormProps) => {
           </div>
         </form>
       )}
-      ;
     </>
   );
 };
