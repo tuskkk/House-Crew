@@ -16,4 +16,14 @@ type TaskCategoryData = {
   tasks: TaskCategoryItem[] | [];
 };
 
-export type { Category, TaskCategoryItem, TaskCategoryData };
+type CategorySuccessData = {
+  isSuccessShown: boolean;
+  categoryName: string | null;
+};
+
+export type {
+  Category,
+  TaskCategoryItem,
+  TaskCategoryData,
+  CategorySuccessData,
+};

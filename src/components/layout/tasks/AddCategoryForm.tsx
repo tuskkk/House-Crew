@@ -6,13 +6,17 @@ import Button from "../../ui/Button";
 import Input from "../../ui/Input";
 import AlertModel from "../../ui/alerts/AlertModel";
 import { useTasks } from "../../../store/tasksStore";
+import type { CategorySuccessData } from "../../../types/category";
 
 type AddCategoryFormProps = {
   closeForm: () => void;
 };
 
 const AddCategoryForm = ({ closeForm }: AddCategoryFormProps) => {
-  const [isSuccessShown, setIsSuccessShown] = useState<boolean>(false);
+  const [successData, setSuccessData] = useState<CategorySuccessData>({
+    isSuccessShown: false,
+    categoryName: null,
+  });
 
   const addCategory = useTasks((state) => state.addCategory);
 
@@ -39,7 +43,11 @@ const AddCategoryForm = ({ closeForm }: AddCategoryFormProps) => {
       name: data.name,
       tasks: [],
     });
-    setIsSuccessShown(true);
+    setSuccessData({
+      ...successData,
+      isSuccessShown: true,
+      categoryName: data.name,
+    });
     setTimeout(() => {
       closeForm();
     }, 3000);
@@ -47,10 +55,10 @@ const AddCategoryForm = ({ closeForm }: AddCategoryFormProps) => {
 
   return (
     <>
-      {isSuccessShown ? (
+      {successData.isSuccessShown ? (
         <AlertModel
           alertType="success"
-          title="New category has been added successfully"
+          title={`The new category ${successData.categoryName} has been added successfully`}
         />
       ) : (
         <form
