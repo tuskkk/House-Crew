@@ -109,9 +109,9 @@ const AddTaskForm = ({ closeForm, categoriesList }: AddTaskFormProps) => {
       isSuccessShown: true,
       taskName: data.name,
     });
-    /*setTimeout(() => {
+    setTimeout(() => {
       closeForm();
-    }, 5000);*/
+    }, 5000);
   };
 
   return (

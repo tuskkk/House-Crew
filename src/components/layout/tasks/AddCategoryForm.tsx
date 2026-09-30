@@ -48,9 +48,9 @@ const AddCategoryForm = ({ closeForm }: AddCategoryFormProps) => {
       isSuccessShown: true,
       categoryName: data.name,
     });
-    /*setTimeout(() => {
+    setTimeout(() => {
       closeForm();
-    }, 5000);*/
+    }, 5000);
   };
 
   return (
