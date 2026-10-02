@@ -4,23 +4,26 @@ import Button from "../components/ui/Button";
 import FilterButton from "../components/layout/filters/FilterButton";
 import TasksList from "../components/layout/tasks/TasksList";
 import Modal from "../components/ui/Modal";
-import AddCategoryForm from "../components/layout/tasks/AddCategoryForm";
-import AddTaskForm from "../components/layout/tasks/AddTaskForm";
+import AddCategoryForm from "../components/layout/tasks/forms/AddCategoryForm";
+import AddTaskForm from "../components/layout/tasks/forms/AddTaskForm";
+import EditTaskForm from "../components/layout/tasks/forms/EditTaskForm";
 import { useState, useMemo } from "react";
 import { useTasks } from "../store/tasksStore";
 import { Plus } from "lucide-react";
-import type { ModalType } from "../types/task";
+import type { ModalType, Task } from "../types/task";
 
 export default function TasksPage() {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
 
   const tasksList = useTasks((state) => state.tasksList);
   const searchQuery = useTasks((state) => state.searchQuery);
+  const activeTask = useTasks((state) => state.activeTask);
   const setSearchQuery = useTasks((state) => state.setSearchQuery);
   const categoryFiltersChosen = useTasks(
     (state) => state.categoryFiltersChosen,
   );
   const setCategoryFilters = useTasks((state) => state.setCategoryFilters);
+  const setActiveTask = useTasks((state) => state.setActiveTask);
   const categories = useMemo(
     () =>
       tasksList.map(({ id, name }) => ({
@@ -29,6 +32,10 @@ export default function TasksPage() {
       })),
     [tasksList],
   );
+  const closeEditTaskModal = () => {
+    setActiveModal(null);
+    setActiveTask(null);
+  };
   return (
     <div className="w-full">
       <PageTitle name="Tasks" />
@@ -92,6 +99,15 @@ export default function TasksPage() {
           <AddTaskForm
             categoriesList={categories}
             closeForm={() => setActiveModal(null)}
+          />
+        </Modal>
+      )}
+      {activeModal === "editTask" && (
+        <Modal title="Edit Task" onClose={() => setActiveModal(null)}>
+          <EditTaskForm
+            categoriesList={categories}
+            closeForm={() => closeEditTaskModal()}
+            task={activeTask as Task}
           />
         </Modal>
       )}
