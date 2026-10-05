@@ -26,13 +26,17 @@ const TaskForm = ({ categoriesList, task, onSubmit }: TaskFormProps) => {
   const categorySelectOptions = categoriesList.map((category: Category) =>
     mapSelectOptions(category.name, category.id),
   );
-  const cycleSelectOptions = cycleOptions.map((cycleOption: Cycle) =>
-    mapSelectOptions(cycleOption, cycleOption),
-  );
-  const prioritySelectOptions = priorityOptions.map(
-    (priorityOption: Priority) =>
+  const cycleSelectOptions = [
+    { label: "-", value: null },
+    ...cycleOptions.map((cycleOption: Cycle) =>
+      mapSelectOptions(cycleOption, cycleOption),
+    ),
+  ];
+  const prioritySelectOptions = [
+    ...priorityOptions.map((priorityOption: Priority) =>
       mapSelectOptions(priorityOption, priorityOption),
-  );
+    ),
+  ];
   const usersSelectOptions = [
     { label: "None", value: "" },
     ...mockUsers.map((user: TaskPersonDetails) =>
