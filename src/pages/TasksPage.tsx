@@ -2,7 +2,7 @@ import { PageTitle } from "../components/ui/PageTitle";
 import SearchBar from "../components/ui/SearchBar";
 import Button from "../components/ui/Button";
 import FilterButton from "../components/layout/filters/FilterButton";
-import TasksList from "../components/layout/tasks/TasksList";
+import CategoriesList from "../components/layout/tasks/CategoriesList";
 import Modal from "../components/ui/Modal";
 import AddCategoryForm from "../components/layout/tasks/forms/AddCategoryForm";
 import AddTaskForm from "../components/layout/tasks/forms/AddTaskForm";
@@ -11,11 +11,12 @@ import { useState, useMemo } from "react";
 import { useTasks } from "../store/tasksStore";
 import { Plus } from "lucide-react";
 import type { ModalType, Task } from "../types/task";
+import { fetchTaskDetails } from "../services/taskDetails";
 
 export default function TasksPage() {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
 
-  const tasksList = useTasks((state) => state.tasksList);
+  const categoriesList = useTasks((state) => state.categoriesList);
   const searchQuery = useTasks((state) => state.searchQuery);
   const activeTask = useTasks((state) => state.activeTask);
   const setSearchQuery = useTasks((state) => state.setSearchQuery);
@@ -26,12 +27,17 @@ export default function TasksPage() {
   const setActiveTask = useTasks((state) => state.setActiveTask);
   const categories = useMemo(
     () =>
-      tasksList.map(({ id, name }) => ({
+      categoriesList.map(({ id, name }) => ({
         id,
         name,
       })),
-    [tasksList],
+    [categoriesList],
   );
+
+  const openEditTaskModal = (taskId: string) => {
+    setActiveTask(fetchTaskDetails(taskId));
+    setActiveModal("editTask");
+  };
   const closeEditTaskModal = () => {
     setActiveModal(null);
     setActiveTask(null);
@@ -87,7 +93,7 @@ export default function TasksPage() {
             }
           />
         </div>
-        <TasksList />
+        <CategoriesList openEditTaskModal={openEditTaskModal} />
       </section>
       {activeModal === "addCategory" && (
         <Modal title="Add New Category" onClose={() => setActiveModal(null)}>
