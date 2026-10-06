@@ -20,23 +20,23 @@ const Accordion = ({ title, initiallyOpen, children }: AccordionProps) => {
         type="button"
         onClick={handleToggle}
         aria-expanded={isOpen}
-        className="w-full flex items-center justify-between bg-background rounded shadow-md px-3 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 md:py-2"
+        className="w-full flex items-center justify-between bg-background hover:bg-secondary/30 hover:shadow-lg rounded shadow-md px-3 py-2 cursor-pointer transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 md:py-2"
       >
-        <h2 className="text-md text-primary font-semibold tracking-wide md:text-lg">
+        <h2 className="text-md text-accent font-semibold tracking-wide md:text-lg">
           {title}
         </h2>
-        <div className="flex items-center justify-center bg-secondary rounded shadow-md px-2 py-2 md:px-3 md:py-3">
+        <div className="flex items-center justify-center bg-accent rounded shadow-md px-2 py-2 hover:bg-text-primary md:px-3 md:py-3">
           {isOpen ? (
             <ChevronUp
               size={28}
-              color="#92140c"
+              color="white"
               strokeWidth={2}
               aria-hidden="true"
             />
           ) : (
             <ChevronDown
               size={28}
-              color="#92140c"
+              color="white"
               strokeWidth={2}
               aria-hidden="true"
             />
