@@ -75,23 +75,27 @@ export default function TasksPage() {
               options={categories}
               selectedOptions={categoryFiltersChosen}
               submitOptions={setCategoryFilters}
+              dropdownChildren={
+                <Button
+                  className="whitespace-nowrap"
+                  onClick={() => setActiveModal("addCategory")}
+                  children={
+                    <div className="flex items-center justify-center gap-1">
+                      <Plus
+                        size={20}
+                        color="white"
+                        strokeWidth={2}
+                        aria-hidden="true"
+                      />
+                      <span className="text-sm tracking-wide">
+                        Add Category
+                      </span>
+                    </div>
+                  }
+                />
+              }
             />
           </div>
-          <Button
-            className="whitespace-nowrap"
-            onClick={() => setActiveModal("addCategory")}
-            children={
-              <div className="flex items-center justify-center gap-1">
-                <Plus
-                  size={20}
-                  color="white"
-                  strokeWidth={2}
-                  aria-hidden="true"
-                />
-                <span className="text-sm tracking-wide">Add Category</span>
-              </div>
-            }
-          />
         </div>
         <CategoriesList openEditTaskModal={openEditTaskModal} />
       </section>

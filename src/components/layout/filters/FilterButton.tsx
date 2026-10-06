@@ -10,6 +10,7 @@ interface FilterButtonProps {
   isDisabled?: boolean;
   selectedOptions: string[];
   submitOptions: (options: string[]) => void;
+  dropdownChildren?: React.ReactNode;
 }
 
 export default function FilterButton({
@@ -18,6 +19,7 @@ export default function FilterButton({
   isDisabled = false,
   selectedOptions,
   submitOptions,
+  dropdownChildren,
 }: FilterButtonProps) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -44,6 +46,7 @@ export default function FilterButton({
           options={options}
           selectedOptions={selectedOptions}
           handleSubmitFilters={handleSubmitFilters}
+          children={dropdownChildren}
         />
       )}
     </div>

@@ -8,12 +8,14 @@ interface FilterDropdownProps {
   options: Category[];
   selectedOptions: string[];
   handleSubmitFilters: (options: string[]) => void;
+  children?: React.ReactNode;
 }
 
 export default function FilterDropdown({
   options,
   selectedOptions,
   handleSubmitFilters,
+  children,
 }: FilterDropdownProps) {
   const [optionsChosen, setOptionsChosen] = useState<string[]>(selectedOptions);
 
@@ -26,7 +28,7 @@ export default function FilterDropdown({
   };
   return (
     <Dropdown className="-left-6 flex h-80 flex-col overflow-hidden">
-      <div className="relative flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent">
+      <div className="relative flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent py-2">
         {options.map((option) => (
           <button
             key={option.id}
@@ -43,8 +45,8 @@ export default function FilterDropdown({
             <span>{option.name}</span>
           </button>
         ))}
+        <div className="pl-2 py-1">{children}</div>
       </div>
-
       <div className="shrink-0 border-t border-disabled p-2">
         <Button
           className="w-full py-2"
