@@ -25,7 +25,7 @@ const Accordion = ({ title, initiallyOpen, children }: AccordionProps) => {
         <h2 className="text-md text-accent font-semibold tracking-wide md:text-lg">
           {title}
         </h2>
-        <div className="flex items-center justify-center bg-secondary rounded shadow-md px-2 py-2 hover:bg-text-primary md:px-3 md:py-3">
+        <div className="flex items-center justify-center bg-secondary rounded shadow-md px-2 py-2 hover:bg-pending-300 md:px-3 md:py-3">
           {isOpen ? (
             <ChevronUp
               size={28}

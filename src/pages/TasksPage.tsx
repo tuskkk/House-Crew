@@ -1,12 +1,12 @@
 import { PageTitle } from "../components/ui/PageTitle";
 import SearchBar from "../components/ui/SearchBar";
 import Button from "../components/ui/Button";
-import FilterButton from "../components/layout/filters/FilterButton";
 import CategoriesList from "../components/layout/tasks/CategoriesList";
 import Modal from "../components/ui/Modal";
 import AddCategoryForm from "../components/layout/tasks/forms/AddCategoryForm";
 import AddTaskForm from "../components/layout/tasks/forms/AddTaskForm";
 import EditTaskForm from "../components/layout/tasks/forms/EditTaskForm";
+import TasksFilters from "../components/layout/filters/TasksFilters";
 import { useState, useMemo } from "react";
 import { useTasks } from "../store/tasksStore";
 import { Plus } from "lucide-react";
@@ -20,10 +20,6 @@ export default function TasksPage() {
   const searchQuery = useTasks((state) => state.searchQuery);
   const activeTask = useTasks((state) => state.activeTask);
   const setSearchQuery = useTasks((state) => state.setSearchQuery);
-  const categoryFiltersChosen = useTasks(
-    (state) => state.categoryFiltersChosen,
-  );
-  const setCategoryFilters = useTasks((state) => state.setCategoryFilters);
   const setActiveTask = useTasks((state) => state.setActiveTask);
   const categories = useMemo(
     () =>
@@ -69,33 +65,7 @@ export default function TasksPage() {
           />
         </div>
         <div className="flex items-center justify-between gap-2 border-b border-b-disabled px-3 py-4 md:gap-4 lg:px-7">
-          <div className="flex items-center justify-start flex-1 gap-2 md:gap-4">
-            <FilterButton
-              filterName="Category"
-              options={categories}
-              selectedOptions={categoryFiltersChosen}
-              submitOptions={setCategoryFilters}
-              dropdownChildren={
-                <Button
-                  className="whitespace-nowrap"
-                  onClick={() => setActiveModal("addCategory")}
-                  children={
-                    <div className="flex items-center justify-center gap-1">
-                      <Plus
-                        size={20}
-                        color="white"
-                        strokeWidth={2}
-                        aria-hidden="true"
-                      />
-                      <span className="text-sm tracking-wide">
-                        Add Category
-                      </span>
-                    </div>
-                  }
-                />
-              }
-            />
-          </div>
+          <TasksFilters setActiveModal={setActiveModal} />
         </div>
         <CategoriesList openEditTaskModal={openEditTaskModal} />
       </section>

@@ -1,25 +1,27 @@
 import { Check } from "lucide-react";
 import Dropdown from "../../ui/Dropdown";
 import Button from "../../ui/Button";
-import type { Category } from "../../../types/category";
 import { useState } from "react";
 
-interface FilterDropdownProps {
-  options: Category[];
-  selectedOptions: string[];
-  handleSubmitFilters: (options: string[]) => void;
+type FilterDropdownProps<T extends string> = {
+  options: {
+    id: T;
+    name: string;
+  }[];
+  selectedOptions: T[];
+  handleSubmitFilters: (options: T[]) => void;
   children?: React.ReactNode;
-}
+};
 
-export default function FilterDropdown({
+export const FilterDropdown = <T extends string>({
   options,
   selectedOptions,
   handleSubmitFilters,
   children,
-}: FilterDropdownProps) {
-  const [optionsChosen, setOptionsChosen] = useState<string[]>(selectedOptions);
+}: FilterDropdownProps<T>) => {
+  const [optionsChosen, setOptionsChosen] = useState<T[]>(selectedOptions);
 
-  const handleOptionClick = (option: string) => {
+  const handleOptionClick = (option: T) => {
     if (!optionsChosen.includes(option)) {
       setOptionsChosen([...optionsChosen, option]);
     } else {
@@ -58,4 +60,4 @@ export default function FilterDropdown({
       </div>
     </Dropdown>
   );
-}
+};

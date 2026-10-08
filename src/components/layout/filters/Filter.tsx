@@ -1,34 +1,36 @@
 import Button from "../../ui/Button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
-import FilterDropdown from "./FilterDropdown";
-import type { Category } from "../../../types/category";
+import { FilterDropdown } from "./FilterDropdown";
 
-interface FilterButtonProps {
+type FilterProps<T extends string> = {
   filterName: string;
-  options: Category[];
+  options: {
+    id: T;
+    name: string;
+  }[];
   isDisabled?: boolean;
-  selectedOptions: string[];
-  submitOptions: (options: string[]) => void;
+  selectedOptions: T[];
+  submitOptions: (options: T[]) => void;
   dropdownChildren?: React.ReactNode;
-}
+};
 
-export default function FilterButton({
+export const Filter = <T extends string>({
   filterName,
   options,
   isDisabled = false,
   selectedOptions,
   submitOptions,
   dropdownChildren,
-}: FilterButtonProps) {
+}: FilterProps<T>) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const handleSubmitFilters = (filters: string[]) => {
+  const handleSubmitFilters = (filters: T[]) => {
     submitOptions(filters);
     setIsFilterOpen((prev) => !prev);
   };
   return (
-    <div className="relative w-full">
+    <div className="relative">
       <Button
         className="md:w-36"
         onClick={() => setIsFilterOpen((prev) => !prev)}
@@ -51,4 +53,4 @@ export default function FilterButton({
       )}
     </div>
   );
-}
+};

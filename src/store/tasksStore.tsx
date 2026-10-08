@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { TaskCategoryData } from "../types/category";
-import type { Task } from "../types/task";
+import type { Cycle, Task } from "../types/task";
 import { categories, mockTasks } from "../data/mockTasks"; // Mock data for initial state
 
 interface TasksState {
@@ -15,6 +15,8 @@ interface TasksState {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   categoryFiltersChosen: string[];
+  cycleFiltersChosen: Cycle[];
+  setCycleFilters: (filters: Cycle[]) => void;
   setCategoryFilters: (filters: string[]) => void;
 }
 
@@ -68,4 +70,6 @@ export const useTasks = create<TasksState>((set) => ({
   categoryFiltersChosen: [],
   setCategoryFilters: (filters: string[]) =>
     set({ categoryFiltersChosen: filters }),
+  cycleFiltersChosen: [],
+  setCycleFilters: (filters: Cycle[]) => set({ cycleFiltersChosen: filters }),
 }));
