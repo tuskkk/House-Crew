@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { TaskCategoryData } from "../types/category";
-import type { Cycle, Task } from "../types/task";
+import type { Cycle, Task, Priority } from "../types/task";
 import { categories, mockTasks } from "../data/mockTasks"; // Mock data for initial state
 
 interface TasksState {
@@ -16,8 +16,12 @@ interface TasksState {
   setSearchQuery: (query: string) => void;
   categoryFiltersChosen: string[];
   cycleFiltersChosen: Cycle[];
+  priorityFiltersChosen: Priority[];
+  assigneeFiltersChosen: string[];
   setCycleFilters: (filters: Cycle[]) => void;
   setCategoryFilters: (filters: string[]) => void;
+  setPriorityFilters: (filters: Priority[]) => void;
+  setAssigneeFilters: (filters: string[]) => void;
 }
 
 export const useTasks = create<TasksState>((set) => ({
@@ -71,5 +75,11 @@ export const useTasks = create<TasksState>((set) => ({
   setCategoryFilters: (filters: string[]) =>
     set({ categoryFiltersChosen: filters }),
   cycleFiltersChosen: [],
+  priorityFiltersChosen: [],
+  assigneeFiltersChosen: [],
   setCycleFilters: (filters: Cycle[]) => set({ cycleFiltersChosen: filters }),
+  setPriorityFilters: (filters: Priority[]) =>
+    set({ priorityFiltersChosen: filters }),
+  setAssigneeFilters: (filters: string[]) =>
+    set({ assigneeFiltersChosen: filters }),
 }));

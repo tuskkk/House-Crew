@@ -29,7 +29,7 @@ export const FilterDropdown = <T extends string>({
     }
   };
   return (
-    <Dropdown className="-left-6 flex h-80 flex-col overflow-hidden">
+    <Dropdown className="-left-6 flex flex-col overflow-hidden max-h-96">
       <div className="relative flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent py-2">
         {options.map((option) => (
           <button

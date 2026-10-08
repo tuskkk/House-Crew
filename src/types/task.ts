@@ -51,6 +51,8 @@ type Task = TaskCategoryItem & {
 
 type ModalType = "addCategory" | "addTask" | "editTask" | "deleteTask" | null;
 
+type TaskDetailFilterType = "cycleDetails" | "priority" | "assigneeId";
+
 type TaskSuccessData = {
   isSuccessShown: boolean;
   taskName: string | null;
@@ -63,5 +65,6 @@ export type {
   Task,
   TaskDetails,
   ModalType,
+  TaskDetailFilterType,
   TaskSuccessData,
 };
