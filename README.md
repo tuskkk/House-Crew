@@ -6,78 +6,159 @@ The application allows users to plan tasks, assign them to household members, tr
 
 > 🚧 **Project status:** In development
 
+## Getting Started
+
+### Prerequisites
+
+Before running the frontend, make sure you have installed:
+
+- [Node.js](https://nodejs.org/) — a version 20.19+ or 22.12+ (compatible with the installed Vite 8.2 version)
+- npm — installed alongside Node.js - 10+
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+Navigate to the project directory:
+
+```bash
+cd house-crew
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+### Development
+
+Start the Vite development server:
+
+```bash
+npm run dev
+```
+
+Open the local URL displayed in the terminal to access the application.
+
+### Available Scripts
+
+| Command           | Description                                                   |
+| ----------------- | ------------------------------------------------------------- |
+| `npm run dev`     | Starts the Vite development server                            |
+| `npm run build`   | Runs TypeScript project checks and creates a production build |
+| `npm run lint`    | Runs ESLint to check the code                                 |
+| `npm run preview` | Serves the production build locally for preview               |
+| `npm run prepare` | Sets up Husky Git hooks                                       |
+
+### Production Build
+
+To verify the application and generate a production build, run:
+
+```bash
+npm run build
+```
+
+The generated files will be available in the `dist/` directory.
+
+To preview the production build locally, run:
+
+```bash
+npm run preview
+```
+
+### Code Quality
+
+To run ESLint:
+
+```bash
+npm run lint
+```
+
+Prettier is configured to format staged files automatically through `lint-staged` and Husky Git hooks.
+
+To format files manually, run:
+
+```bash
+npx prettier --write .
+```
+
 ## Features
 
-### 📋 Dashboard
+### 📋 Dashboard - in progress
 
 A personal view of household duties with different time ranges:
 
-* day
-* week
-* month
-* year
-* task completion tracking
-* marking tasks as completed
-* recording time spent on completed tasks
+- day
+- week
+- month
+- year
+- task completion tracking
+- marking tasks as completed
+- recording time spent on completed tasks
 
-### 📅 Calendar
+### 📅 Calendar - in progress
 
 A shared calendar presenting tasks for the entire household.
 
 Planned functionality includes:
 
-* displaying scheduled, completed and incomplete tasks
-* viewing tasks across the current, previous and following month
-* filtering tasks by household member, task status and task name
-* displaying task details in a tooltip
-* browsing historical tasks up to one year back
+- displaying scheduled, completed and incomplete tasks
+- viewing tasks across the current, previous and following month
+- filtering tasks by household member, task status and task name
+- displaying task details in a tooltip
+- browsing historical tasks up to one year back
 
-### 📝 Task management
+### 📝 Tasks management - almost finished
 
 A dedicated section for managing household tasks.
 
 Users will be able to:
 
-* organize tasks into categories
-* create new tasks
-* add custom categories
-* schedule tasks
-* create recurring tasks
-* assign tasks to specific household members
-* view task completion statistics
+- organize tasks into categories
+- create new tasks
+- add custom categories
+- schedule tasks
+- create recurring tasks
+- assign tasks to specific household members
+- view task completion statistics
 
 Example categories include:
 
-* bathroom
-* kitchen
-* bedroom
-* living room
-* terrace
-* hallway
-* pantry
-* storage room
-* garage
-* shopping
-* cooking
-* childcare
-* additional tasks
+- bathroom
+- kitchen
+- bedroom
+- living room
+- terrace
+- hallway
+- pantry
+- storage room
+- garage
+- shopping
+- cooking
+- childcare
+- additional tasks
 
-### 📊 Statistics
+### 📊 Statistics - in progress
 
 Statistics for individual household members and the household as a whole.
 
 Planned metrics include:
 
-* number of planned tasks
-* number of completed tasks
-* task completion rate
-* time spent completing tasks
+- number of planned tasks
+- number of completed tasks
+- task completion rate
+- time spent completing tasks
 
 Statistics will be available for different periods:
 
-* week
-* month
-* year
+- week
+- month
+- year
 
 ### 🔔 Notifications
 
@@ -93,23 +174,23 @@ The project is being developed incrementally.
 
 ### Frontend
 
-* React
-* TypeScript
-* Vite
-* React Router
+- React
+- TypeScript
+- Vite
+- React Router
 
 Initially, the frontend will use mock data so that the application structure and user experience can be developed independently from the backend.
 
 ### Backend — planned
 
-* Python
-* FastAPI
-* Pydantic
-* SQLAlchemy
+- Python
+- FastAPI
+- Pydantic
+- SQLAlchemy
 
 ### Database — planned
 
-* PostgreSQL
+- PostgreSQL
 
 ### Architecture
 
@@ -135,14 +216,14 @@ HouseCrew is being developed in stages.
 
 The first stage focuses entirely on the React application:
 
-* application layout
-* routing
-* reusable components
-* forms
-* application state
-* responsive design
-* basic interactions
-* mock data
+- application layout
+- routing
+- reusable components
+- forms
+- application state
+- responsive design
+- basic interactions
+- mock data
 
 ### 2. Backend
 
@@ -150,12 +231,12 @@ Once the frontend has a solid structure, the backend will be introduced using Py
 
 The backend stage will cover:
 
-* Python fundamentals
-* REST API development
-* Pydantic
-* error handling
-* asynchronous operations
-* testing
+- Python fundamentals
+- REST API development
+- Pydantic
+- error handling
+- asynchronous operations
+- testing
 
 ### 3. Database
 
@@ -190,13 +271,6 @@ src/
 │   ├── ui/
 │   ├── layout/
 │   └── common/
-│
-├── features/
-│   ├── auth/
-│   ├── dashboard/
-│   ├── tasks/
-│   ├── calendar/
-│   └── statistics/
 │
 ├── pages/
 │   ├── LandingPage.tsx
@@ -265,19 +339,19 @@ HouseCrew is both a portfolio project and a practical application for exploring 
 
 The project is intended to provide hands-on experience with:
 
-* React
-* TypeScript
-* frontend architecture
-* state management
-* REST APIs
-* Python
-* FastAPI
-* SQLAlchemy
-* PostgreSQL
-* frontend–backend integration
-* testing
-* responsive web development
-* PWA development
+- React
+- TypeScript
+- frontend architecture
+- state management
+- REST APIs
+- Python
+- FastAPI
+- SQLAlchemy
+- PostgreSQL
+- frontend–backend integration
+- testing
+- responsive web development
+- PWA development
 
 ## Future Development
 
@@ -285,4 +359,4 @@ The project will be developed incrementally. Features such as advanced calendar 
 
 ---
 
-**HouseCrew** — *One home. One team. Shared responsibilities.*
+**HouseCrew** — _One home. One team. Shared responsibilities._
