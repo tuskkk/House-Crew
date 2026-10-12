@@ -10,7 +10,7 @@ import type {
   Priority,
   TaskPersonDetails,
 } from "../../../../types/task";
-import type { TaskFormData } from "./taskSchema";
+import type { TaskFormData, TaskFormInput } from "./taskSchema";
 import { taskSchema } from "./taskSchema";
 import { cycleOptions, priorityOptions } from "../../../../types/task";
 import { mockUsers } from "../../../../data/mockUsers";
@@ -27,7 +27,7 @@ const TaskForm = ({ categoriesList, task, onSubmit }: TaskFormProps) => {
     mapSelectOptions(category.name, category.id),
   );
   const cycleSelectOptions = [
-    { label: "-", value: null },
+    { label: "None", value: "" },
     ...cycleOptions.map((cycleOption: Cycle) =>
       mapSelectOptions(cycleOption, cycleOption),
     ),
@@ -38,7 +38,7 @@ const TaskForm = ({ categoriesList, task, onSubmit }: TaskFormProps) => {
     ),
   ];
   const usersSelectOptions = [
-    { label: "None", value: "" },
+    { label: "None", value: null },
     ...mockUsers.map((user: TaskPersonDetails) =>
       mapSelectOptions(user.name, user.id),
     ),
@@ -48,16 +48,16 @@ const TaskForm = ({ categoriesList, task, onSubmit }: TaskFormProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TaskFormData>({
+  } = useForm<TaskFormInput, unknown, TaskFormData>({
     resolver: zodResolver(taskSchema(categoriesList)),
     ...(task && {
       defaultValues: {
-        category: task?.category.id,
-        name: task?.name,
-        cycleDetails: task?.details.cycleDetails,
-        dueDate: task?.details.dueDate ?? "",
-        priority: task?.details.priority,
-        assigneeId: task?.details.assigneeId ?? "",
+        category: task.category.id,
+        name: task.name,
+        cycleDetails: task.details.cycleDetails ?? "",
+        dueDate: task.details.dueDate ?? "",
+        priority: task.details.priority ?? "low",
+        assigneeId: task.details.assigneeId ?? "",
       },
     }),
   });

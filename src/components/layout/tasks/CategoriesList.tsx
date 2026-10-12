@@ -21,6 +21,12 @@ export default function CategoriesList({
     (state) => state.categoryFiltersChosen,
   );
   const cycleFiltersChosen = useTasks((state) => state.cycleFiltersChosen);
+  const priorityFiltersChosen = useTasks(
+    (state) => state.priorityFiltersChosen,
+  );
+  const assigneeFiltersChosen = useTasks(
+    (state) => state.assigneeFiltersChosen,
+  );
 
   const filteredTaskIds = useMemo(
     () =>
@@ -35,10 +41,29 @@ export default function CategoriesList({
             (task.details.cycleDetails &&
               cycleFiltersChosen.includes(task.details.cycleDetails));
 
-          return matchesCategory && matchesCycle;
+          const matchesPriority =
+            priorityFiltersChosen.length === 0 ||
+            priorityFiltersChosen.includes(task.details.priority);
+
+          const matchesAssignee =
+            assigneeFiltersChosen.length === 0 ||
+            (task.details.assigneeId &&
+              assigneeFiltersChosen.includes(task.details.assigneeId));
+
+          return (
+            matchesCategory &&
+            matchesCycle &&
+            matchesPriority &&
+            matchesAssignee
+          );
         })
         .map((task) => task.id),
-    [tasksList, categoryFiltersChosen, cycleFiltersChosen],
+    [
+      tasksList,
+      categoryFiltersChosen,
+      cycleFiltersChosen,
+      priorityFiltersChosen,
+    ],
   );
 
   const filteredCategoriesList = useMemo(
