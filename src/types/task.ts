@@ -38,10 +38,10 @@ type TaskStatisticsDetails = {
 };
 
 type TaskDetails = {
-  cycleDetails?: Cycle;
+  cycleDetails?: Cycle | null;
   dueDate: string | null;
-  priority: Priority | null;
-  assigneeId: string | null;
+  priority: Priority;
+  assigneeId?: string;
   statisticsDetails: TaskStatisticsDetails;
 };
 

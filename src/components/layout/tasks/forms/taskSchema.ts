@@ -13,17 +13,23 @@ export const taskSchema = (categoriesList: Category[]) => {
     name: z
       .string()
       .min(3, "Task name must contain at least 3 characters")
-      .max(32, "Task name is too long"),
-    cycleDetails: z.enum(cycleOptions).optional(),
+      .max(64, "Task name is too long"),
+    cycleDetails: z
+      .union([z.enum(cycleOptions), z.literal(""), z.null()])
+      .transform((value) => (value === "" ? null : value))
+      .optional(),
     dueDate: z
       .string()
       .refine(
         (value) => value === "" || /^\d{4}-\d{2}-\d{2}$/.test(value),
         "Invalid date",
       ),
-    priority: z.enum(priorityOptions).nullable(),
-    assigneeId: z.string().nullable(),
+    priority: z
+      .union([z.enum(priorityOptions), z.literal(""), z.null()])
+      .transform((value) => (value === "" ? null : value)),
+    assigneeId: z.string().transform((value) => (value === "" ? null : value)),
   });
 };
 
-export type TaskFormData = z.infer<ReturnType<typeof taskSchema>>;
+export type TaskFormInput = z.input<ReturnType<typeof taskSchema>>;
+export type TaskFormData = z.output<ReturnType<typeof taskSchema>>;
