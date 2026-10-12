@@ -1,4 +1,4 @@
-import type { TaskCategoryItem } from "./category";
+import type { TaskCategoryData, TaskCategoryItem } from "./category";
 
 type TaskPersonDetails = {
   id: string;

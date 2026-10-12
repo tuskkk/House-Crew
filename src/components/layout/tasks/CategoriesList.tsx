@@ -63,6 +63,7 @@ export default function CategoriesList({
       categoryFiltersChosen,
       cycleFiltersChosen,
       priorityFiltersChosen,
+      assigneeFiltersChosen,
     ],
   );
 

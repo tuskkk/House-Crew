@@ -1,12 +1,12 @@
 import Button from "../../../components/ui/Button";
 import { Filter } from "./Filter";
+import ActiveFilters from "./ActiveFilters";
 import { useMemo } from "react";
 import { useTasks } from "../../../store/tasksStore";
 import { Plus } from "lucide-react";
+import { detailsOptions } from "../../../utils/detailsOptions";
 import type {
   ModalType,
-  Task,
-  TaskDetailFilterType,
   TaskPersonDetails,
   Cycle,
   Priority,
@@ -35,7 +35,7 @@ export default function TasksFilters({ setActiveModal }: TasksFiltersProps) {
   );
   const setAssigneeFilters = useTasks((state) => state.setAssigneeFilters);
 
-  const categories = useMemo(
+  const categoriesOptions = useMemo(
     () =>
       categoriesList.map(({ id, name }) => ({
         id,
@@ -43,33 +43,18 @@ export default function TasksFilters({ setActiveModal }: TasksFiltersProps) {
       })),
     [categoriesList],
   );
-  const detailsOptions = <T extends string>(
-    propertyName: TaskDetailFilterType,
-  ) => {
-    return tasksList.reduce<{ id: T; name: string }[]>((acc, task: Task) => {
-      const detail = task.details[propertyName] as T | null | undefined;
 
-      if (detail && !acc.some((option) => option.id === detail)) {
-        acc.push({
-          name: detail,
-          id: detail,
-        });
-      }
-
-      return acc;
-    }, []);
-  };
   const cycleOptions = useMemo(
-    () => detailsOptions<Cycle>("cycleDetails"),
+    () => detailsOptions<Cycle>(tasksList, "cycleDetails"),
     [tasksList],
   );
   const priorityOptions = useMemo(
-    () => detailsOptions<Priority>("priority"),
+    () => detailsOptions<Priority>(tasksList, "priority"),
     [tasksList],
   );
   const assigneeOptions = useMemo(
     () =>
-      detailsOptions<string>("assigneeId").map((option) => {
+      detailsOptions<string>(tasksList, "assigneeId").map((option) => {
         const user = mockUsers.find(
           (user: TaskPersonDetails) => user.id === option.id,
         );
@@ -81,50 +66,58 @@ export default function TasksFilters({ setActiveModal }: TasksFiltersProps) {
     [tasksList],
   );
   return (
-    <div className="flex items-center justify-start flex-1 gap-2 md:gap-6">
-      <Filter
-        filterName="Category"
-        options={categories}
-        selectedOptions={categoryFiltersChosen}
-        submitOptions={setCategoryFilters}
-        dropdownChildren={
-          <Button
-            className="whitespace-nowrap"
-            onClick={() => setActiveModal("addCategory")}
-            children={
-              <div className="flex items-center justify-center gap-1">
-                <Plus
-                  size={20}
-                  color="white"
-                  strokeWidth={2}
-                  aria-hidden="true"
-                />
-                <span className="text-sm tracking-wide">Add Category</span>
-              </div>
-            }
-          />
-        }
-      />
-      <Filter
-        filterName="Cycle"
-        options={cycleOptions}
-        selectedOptions={cycleFiltersChosen}
-        submitOptions={setCycleFilters}
-      />
-      <Filter
-        filterName="Priority"
-        options={priorityOptions}
-        selectedOptions={priorityFiltersChosen}
-        submitOptions={setPriorityFilters}
-      />
-      {assigneeOptions.length ? (
+    <section className="flex flex-col items-start gap-6">
+      <div className="flex items-center justify-start flex-1 gap-2 md:gap-6">
         <Filter
-          filterName="Assignee"
-          options={assigneeOptions}
-          selectedOptions={assigneeFiltersChosen}
-          submitOptions={setAssigneeFilters}
+          filterName="Category"
+          options={categoriesOptions}
+          selectedOptions={categoryFiltersChosen}
+          submitOptions={setCategoryFilters}
+          dropdownChildren={
+            <Button
+              className="whitespace-nowrap"
+              onClick={() => setActiveModal("addCategory")}
+              children={
+                <div className="flex items-center justify-center gap-1">
+                  <Plus
+                    size={20}
+                    color="white"
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  />
+                  <span className="text-sm tracking-wide">Add Category</span>
+                </div>
+              }
+            />
+          }
         />
-      ) : null}
-    </div>
+        <Filter
+          filterName="Cycle"
+          options={cycleOptions}
+          selectedOptions={cycleFiltersChosen}
+          submitOptions={setCycleFilters}
+        />
+        <Filter
+          filterName="Priority"
+          options={priorityOptions}
+          selectedOptions={priorityFiltersChosen}
+          submitOptions={setPriorityFilters}
+        />
+        {assigneeOptions.length ? (
+          <Filter
+            filterName="Assignee"
+            options={assigneeOptions}
+            selectedOptions={assigneeFiltersChosen}
+            submitOptions={setAssigneeFilters}
+          />
+        ) : null}
+      </div>
+      <ActiveFilters
+        categoriesOptions={categoriesOptions}
+        cycleOptions={cycleOptions}
+        priorityOptions={priorityOptions}
+        assigneeOptions={assigneeOptions}
+      />
+    </section>
   );
 }
