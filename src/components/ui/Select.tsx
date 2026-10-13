@@ -42,7 +42,6 @@ const Select = ({
             </option>
           ))}
         </select>
-
         <ChevronDown
           size={20}
           strokeWidth={2}

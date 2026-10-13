@@ -58,32 +58,42 @@ export default function ActiveFilters({
     });
   };
 
+  const hasActiveFilters =
+    categoryFiltersChosen.length > 0 ||
+    cycleFiltersChosen.length > 0 ||
+    priorityFiltersChosen.length > 0 ||
+    assigneeFiltersChosen.length > 0;
+
   return (
-    <div className="flex items-start justify-start flex-1 gap-4 flex-wrap">
-      {handleRenderFilterBadges(
-        "Category",
-        categoriesOptions,
-        categoryFiltersChosen,
-        setCategoryFilters,
+    <>
+      {hasActiveFilters && (
+        <div className="flex items-start justify-start flex-1 gap-4 flex-wrap">
+          {handleRenderFilterBadges(
+            "Category",
+            categoriesOptions,
+            categoryFiltersChosen,
+            setCategoryFilters,
+          )}
+          {handleRenderFilterBadges(
+            "Cycle",
+            cycleOptions,
+            cycleFiltersChosen,
+            setCycleFilters,
+          )}
+          {handleRenderFilterBadges(
+            "Priority",
+            priorityOptions,
+            priorityFiltersChosen,
+            setPriorityFilters,
+          )}
+          {handleRenderFilterBadges(
+            "Assignee",
+            assigneeOptions,
+            assigneeFiltersChosen,
+            setAssigneeFilters,
+          )}
+        </div>
       )}
-      {handleRenderFilterBadges(
-        "Cycle",
-        cycleOptions,
-        cycleFiltersChosen,
-        setCycleFilters,
-      )}
-      {handleRenderFilterBadges(
-        "Priority",
-        priorityOptions,
-        priorityFiltersChosen,
-        setPriorityFilters,
-      )}
-      {handleRenderFilterBadges(
-        "Assignee",
-        assigneeOptions,
-        assigneeFiltersChosen,
-        setAssigneeFilters,
-      )}
-    </div>
+    </>
   );
 }
