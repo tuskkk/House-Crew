@@ -43,7 +43,8 @@ export default function CategoriesList({
 
           const matchesPriority =
             priorityFiltersChosen.length === 0 ||
-            priorityFiltersChosen.includes(task.details.priority);
+            (task.details.priority !== null &&
+              priorityFiltersChosen.includes(task.details.priority));
 
           const matchesAssignee =
             assigneeFiltersChosen.length === 0 ||

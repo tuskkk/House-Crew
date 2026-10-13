@@ -1,4 +1,4 @@
-import type { TaskCategoryData, TaskCategoryItem } from "./category";
+import type { TaskCategoryItem } from "./category";
 
 type TaskPersonDetails = {
   id: string;
@@ -40,7 +40,7 @@ type TaskStatisticsDetails = {
 type TaskDetails = {
   cycleDetails?: Cycle | null;
   dueDate: string | null;
-  priority: Priority;
+  priority: Priority | null;
   assigneeId?: string;
   statisticsDetails: TaskStatisticsDetails;
 };

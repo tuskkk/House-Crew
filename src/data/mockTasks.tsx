@@ -962,7 +962,7 @@ export const mockTasks: Task[] = categories.flatMap((category, categoryIndex) =>
             : undefined,
         dueDate: null,
         priority: priorityOptions[taskIndex % priorityOptions.length],
-        assigneeId: null,
+        assigneeId: undefined,
         statisticsDetails: {
           count: {
             general: 0,

@@ -42,7 +42,7 @@ const EditTaskForm = ({
           : { cycleDetails: undefined }),
         dueDate: data.dueDate || null,
         priority: data.priority || null,
-        assigneeId: data.assigneeId || null,
+        assigneeId: data.assigneeId || undefined,
       },
     });
 

@@ -29,6 +29,7 @@ export default function TasksPage() {
       })),
     [categoriesList],
   );
+  console.log(111, activeModal);
 
   const openEditTaskModal = (taskId: string) => {
     setActiveTask(fetchTaskDetails(taskId));

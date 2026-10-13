@@ -31,9 +31,9 @@ const AddTaskForm = ({ closeForm, categoriesList }: AddTaskFormProps) => {
       name: data.name,
       details: {
         ...(data.cycleDetails && { cycleDetails: data.cycleDetails }),
-        dueDate: data.dueDate ? data.dueDate : null,
-        priority: data.priority ? data.priority : null,
-        assigneeId: data.assigneeId ? data.assigneeId : null,
+        dueDate: data.dueDate || null,
+        priority: data.priority || null,
+        assigneeId: data.assigneeId || undefined,
         statisticsDetails: {
           count: {
             general: 0,
