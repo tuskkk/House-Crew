@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import AlertModel from "../../../ui/alerts/AlertModel";
 import TaskForm from "./TaskForm";
 import { useTasks } from "../../../../store/tasksStore";
@@ -21,6 +21,16 @@ const EditTaskForm = ({
     isSuccessShown: false,
     taskName: null,
   });
+
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current !== null) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const updateTask = useTasks((state) => state.updateTask);
 
@@ -51,7 +61,7 @@ const EditTaskForm = ({
       taskName: data.name,
     });
 
-    setTimeout(() => {
+    closeTimeoutRef.current = setTimeout(() => {
       closeForm();
     }, 5000);
   };

@@ -21,6 +21,7 @@ export default function TasksPage() {
   const activeTask = useTasks((state) => state.activeTask);
   const setSearchQuery = useTasks((state) => state.setSearchQuery);
   const setActiveTask = useTasks((state) => state.setActiveTask);
+
   const categories = useMemo(
     () =>
       categoriesList.map(({ id, name }) => ({
@@ -29,7 +30,6 @@ export default function TasksPage() {
       })),
     [categoriesList],
   );
-  console.log(111, activeModal);
 
   const openEditTaskModal = (taskId: string) => {
     setActiveTask(fetchTaskDetails(taskId));
@@ -84,7 +84,7 @@ export default function TasksPage() {
         </Modal>
       )}
       {activeModal === "editTask" && (
-        <Modal title="Edit Task" onClose={() => setActiveModal(null)}>
+        <Modal title="Edit Task" onClose={closeEditTaskModal}>
           <EditTaskForm
             categoriesList={categories}
             closeForm={() => closeEditTaskModal()}
