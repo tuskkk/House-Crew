@@ -38,7 +38,7 @@ const TaskForm = ({ categoriesList, task, onSubmit }: TaskFormProps) => {
     ),
   ];
   const usersSelectOptions = [
-    { label: "None", value: null },
+    { label: "None", value: "" },
     ...mockUsers.map((user: TaskPersonDetails) =>
       mapSelectOptions(user.name, user.id),
     ),
