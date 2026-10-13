@@ -18,10 +18,12 @@ interface TasksState {
   cycleFiltersChosen: Cycle[];
   priorityFiltersChosen: Priority[];
   assigneeFiltersChosen: string[];
+  dateFiltersChosen: { from: string | null; to: string | null };
   setCycleFilters: (filters: Cycle[]) => void;
   setCategoryFilters: (filters: string[]) => void;
   setPriorityFilters: (filters: Priority[]) => void;
   setAssigneeFilters: (filters: string[]) => void;
+  setDateFilters: (filters: { from: string | null; to: string | null }) => void;
 }
 
 export const useTasks = create<TasksState>((set) => ({
@@ -77,9 +79,12 @@ export const useTasks = create<TasksState>((set) => ({
   cycleFiltersChosen: [],
   priorityFiltersChosen: [],
   assigneeFiltersChosen: [],
+  dateFiltersChosen: { from: null, to: null },
   setCycleFilters: (filters: Cycle[]) => set({ cycleFiltersChosen: filters }),
   setPriorityFilters: (filters: Priority[]) =>
     set({ priorityFiltersChosen: filters }),
   setAssigneeFilters: (filters: string[]) =>
     set({ assigneeFiltersChosen: filters }),
+  setDateFilters: (filters: { from: string | null; to: string | null }) =>
+    set({ dateFiltersChosen: filters }),
 }));

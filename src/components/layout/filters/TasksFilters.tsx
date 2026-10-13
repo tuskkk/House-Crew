@@ -111,6 +111,12 @@ export default function TasksFilters({ setActiveModal }: TasksFiltersProps) {
             submitOptions={setAssigneeFilters}
           />
         ) : null}
+        <Filter
+          filterName="Due date"
+          options={[]}
+          selectedOptions={[]}
+          submitOptions={() => {}}
+        />
       </div>
       <ActiveFilters
         categoriesOptions={categoriesOptions}

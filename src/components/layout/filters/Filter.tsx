@@ -1,4 +1,5 @@
 import Button from "../../ui/Button";
+import { DateFilterDropdown } from "../../layout/filters/DateFilterDropdown";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { FilterDropdown } from "./FilterDropdown";
@@ -43,13 +44,16 @@ export const Filter = <T extends string>({
           {isFilterOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </div>
       </Button>
-      {isFilterOpen && !isDisabled && (
+      {filterName !== "Due date" && isFilterOpen && !isDisabled && (
         <FilterDropdown
           options={options}
           selectedOptions={selectedOptions}
           handleSubmitFilters={handleSubmitFilters}
           children={dropdownChildren}
         />
+      )}
+      {filterName === "Due date" && isFilterOpen && !isDisabled && (
+        <DateFilterDropdown closeDateDropdown={() => setIsFilterOpen(false)} />
       )}
     </div>
   );
