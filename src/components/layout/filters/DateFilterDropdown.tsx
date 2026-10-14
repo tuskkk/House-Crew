@@ -64,8 +64,8 @@ export const DateFilterDropdown = ({
   };
 
   return (
-    <Dropdown className="-left-6 flex flex-col w-72">
-      <div className="flex flex-col gap-2 px-3 py-2">
+    <Dropdown className="-left-6 flex flex-col w-72 pt-2">
+      <div className="flex items-center justify-start gap-4 py-2 px-4">
         <span className="text-sm text-text-secondary">Use date from?</span>
         <Toggle
           checked={!!useDateFrom}
@@ -73,10 +73,11 @@ export const DateFilterDropdown = ({
           label="Use date from?"
         />
       </div>
-      <div className="relative flex-1 py-2">
+      <div className="relative flex-1 p-4">
         {useDateFrom && (
           <Input
             type="date"
+            className="mb-4"
             label="Date from"
             {...register("dateFrom")}
             error={errors.dateFrom?.message}
