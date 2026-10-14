@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { useTasks } from "../../../store/tasksStore";
 import type {
   TaskCategoryData,
@@ -27,6 +27,10 @@ export default function CategoriesList({
   const assigneeFiltersChosen = useTasks(
     (state) => state.assigneeFiltersChosen,
   );
+  const dueDateFiltersChosen = useTasks((state) => state.dateFiltersChosen);
+  useEffect(() => {
+    console.log(1111, dueDateFiltersChosen);
+  }, [dueDateFiltersChosen]);
 
   const filteredTaskIds = useMemo(
     () =>

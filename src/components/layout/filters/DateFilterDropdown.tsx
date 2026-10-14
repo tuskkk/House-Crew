@@ -25,8 +25,7 @@ export const DateFilterDropdown = ({
       .refine(
         (value) => value === "" || /^\d{4}-\d{2}-\d{2}$/.test(value),
         "Invalid date from",
-      )
-      .nullable(),
+      ),
     dateTo: z
       .string()
       .refine(
@@ -37,28 +36,22 @@ export const DateFilterDropdown = ({
 
   type DatesFormType = z.infer<typeof datesSchema>;
 
-  const hasDateFilter = Object.values(dateFiltersChosen).some(
-    (value) => typeof value === "string",
-  );
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<DatesFormType>({
     resolver: zodResolver(datesSchema),
-    ...(hasDateFilter && {
-      defaultValues: {
-        dateFrom: dateFiltersChosen.from || "",
-        dateTo: dateFiltersChosen.to || "",
-      },
-    }),
+    defaultValues: {
+      dateFrom: dateFiltersChosen.from ?? "",
+      dateTo: dateFiltersChosen.to ?? "",
+    },
   });
 
   const onSubmit = (data: DatesFormType) => {
     setDateFilters({
-      from: useDateFrom ? data.dateFrom : null,
-      to: data.dateTo,
+      from: useDateFrom && data.dateFrom !== "" ? data.dateFrom : null,
+      to: data.dateTo !== "" ? data.dateTo : null,
     });
     closeDateDropdown();
   };
