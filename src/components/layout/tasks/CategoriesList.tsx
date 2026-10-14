@@ -27,10 +27,7 @@ export default function CategoriesList({
   const assigneeFiltersChosen = useTasks(
     (state) => state.assigneeFiltersChosen,
   );
-  const dueDateFiltersChosen = useTasks((state) => state.dateFiltersChosen);
-  useEffect(() => {
-    console.log(1111, dueDateFiltersChosen);
-  }, [dueDateFiltersChosen]);
+  const dateFiltersChosen = useTasks((state) => state.dateFiltersChosen);
 
   const filteredTaskIds = useMemo(
     () =>
@@ -55,11 +52,20 @@ export default function CategoriesList({
             (task.details.assigneeId &&
               assigneeFiltersChosen.includes(task.details.assigneeId));
 
+          const matchesDate =
+            (!dateFiltersChosen.from && !dateFiltersChosen.to) ||
+            (!!task.details.dueDate &&
+              (!dateFiltersChosen.from ||
+                task.details.dueDate >= dateFiltersChosen.from) &&
+              (!dateFiltersChosen.to ||
+                task.details.dueDate <= dateFiltersChosen.to));
+
           return (
             matchesCategory &&
             matchesCycle &&
             matchesPriority &&
-            matchesAssignee
+            matchesAssignee &&
+            matchesDate
           );
         })
         .map((task) => task.id),
@@ -69,6 +75,7 @@ export default function CategoriesList({
       cycleFiltersChosen,
       priorityFiltersChosen,
       assigneeFiltersChosen,
+      dateFiltersChosen,
     ],
   );
 

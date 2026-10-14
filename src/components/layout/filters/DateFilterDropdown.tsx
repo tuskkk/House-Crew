@@ -19,20 +19,28 @@ export const DateFilterDropdown = ({
   const setDateFilters = useTasks((state) => state.setDateFilters);
   const [useDateFrom, setUseDateFrom] = useState(!!dateFiltersChosen.from);
 
-  const datesSchema = z.object({
-    dateFrom: z
-      .string()
-      .refine(
-        (value) => value === "" || /^\d{4}-\d{2}-\d{2}$/.test(value),
-        "Invalid date from",
-      ),
-    dateTo: z
-      .string()
-      .refine(
-        (value) => value === "" || /^\d{4}-\d{2}-\d{2}$/.test(value),
-        "Invalid date to",
-      ),
-  });
+  const datesSchema = z
+    .object({
+      dateFrom: z
+        .string()
+        .refine(
+          (value) => value === "" || /^\d{4}-\d{2}-\d{2}$/.test(value),
+          "Invalid date from",
+        ),
+      dateTo: z
+        .string()
+        .refine(
+          (value) => value === "" || /^\d{4}-\d{2}-\d{2}$/.test(value),
+          "Invalid date to",
+        ),
+    })
+    .refine(
+      (data) => !data.dateFrom || !data.dateTo || data.dateTo >= data.dateFrom,
+      {
+        message: "Date to cannot be earlier than Date from",
+        path: ["dateTo"],
+      },
+    );
 
   type DatesFormType = z.infer<typeof datesSchema>;
 
