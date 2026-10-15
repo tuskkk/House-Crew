@@ -3,12 +3,12 @@ import type { ButtonHTMLAttributes } from "react";
 import type { Cycle, Priority } from "../../../types/task";
 
 interface FilterBadgeProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  name: Cycle | Priority | string;
+  filterName: Cycle | Priority | string;
   label: string;
 }
 
 export default function FilterBadge({
-  name,
+  filterName,
   label,
   ...props
 }: FilterBadgeProps) {
@@ -18,7 +18,7 @@ export default function FilterBadge({
       className="flex items-center justify-between gap-1.5 bg-accent py-1.5 pr-1 pl-2 rounded-md text-white text-sm cursor-pointer hover:bg-text-primary"
     >
       {`${label}: `}
-      <span className="font-semibold">{name}</span>
+      <span className="font-semibold">{filterName}</span>
       <X size={16} />
     </button>
   );

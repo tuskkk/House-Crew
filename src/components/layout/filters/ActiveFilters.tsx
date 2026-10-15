@@ -35,6 +35,8 @@ export default function ActiveFilters({
     (state) => state.assigneeFiltersChosen,
   );
   const setAssigneeFilters = useTasks((state) => state.setAssigneeFilters);
+  const dateFiltersChosen = useTasks((state) => state.dateFiltersChosen);
+  const setDateFilters = useTasks((state) => state.setDateFilters);
 
   const handleRenderFilterBadges = <T extends string>(
     label: string,
@@ -50,7 +52,7 @@ export default function ActiveFilters({
       return (
         <FilterBadge
           key={filter}
-          name={option?.name ?? filter}
+          filterName={option?.name ?? filter}
           label={label}
           onClick={() => filterSetter(filtersArray.filter((f) => f !== filter))}
         />
@@ -62,7 +64,9 @@ export default function ActiveFilters({
     categoryFiltersChosen.length > 0 ||
     cycleFiltersChosen.length > 0 ||
     priorityFiltersChosen.length > 0 ||
-    assigneeFiltersChosen.length > 0;
+    assigneeFiltersChosen.length > 0 ||
+    dateFiltersChosen.from ||
+    dateFiltersChosen.to;
 
   return (
     <>
@@ -91,6 +95,24 @@ export default function ActiveFilters({
             assigneeOptions,
             assigneeFiltersChosen,
             setAssigneeFilters,
+          )}
+          {dateFiltersChosen.from && (
+            <FilterBadge
+              filterName={dateFiltersChosen.from}
+              label="Due date from"
+              onClick={() =>
+                setDateFilters({ from: null, to: dateFiltersChosen.to })
+              }
+            />
+          )}
+          {dateFiltersChosen.to && (
+            <FilterBadge
+              filterName={dateFiltersChosen.to}
+              label="Due date until"
+              onClick={() =>
+                setDateFilters({ from: dateFiltersChosen.from, to: null })
+              }
+            />
           )}
         </div>
       )}

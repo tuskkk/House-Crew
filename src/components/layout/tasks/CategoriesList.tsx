@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react";
+import { useMemo } from "react";
 import { useTasks } from "../../../store/tasksStore";
 import type {
   TaskCategoryData,
