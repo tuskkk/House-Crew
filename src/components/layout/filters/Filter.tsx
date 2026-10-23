@@ -1,7 +1,8 @@
 import Button from "../../ui/Button";
 import { DateFilterDropdown } from "../../layout/filters/DateFilterDropdown";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { FilterDropdown } from "./FilterDropdown";
 
 type FilterProps<T extends string> = {
@@ -14,6 +15,7 @@ type FilterProps<T extends string> = {
   selectedOptions: T[];
   submitOptions: (options: T[]) => void;
   dropdownChildren?: React.ReactNode;
+  className?: string;
 };
 
 export const Filter = <T extends string>({
@@ -23,8 +25,40 @@ export const Filter = <T extends string>({
   selectedOptions,
   submitOptions,
   dropdownChildren,
+  ...props
 }: FilterProps<T>) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const filterButtonRef = useRef<HTMLButtonElement>(null);
+  const [dropdownPosition, setDropdownPosition] = useState({
+    top: 0,
+    left: 0,
+  });
+
+  useEffect(() => {
+    if (!isFilterOpen || !filterButtonRef.current) return;
+
+    const updatePosition = () => {
+      const rect = filterButtonRef.current?.getBoundingClientRect();
+
+      if (!rect) return;
+
+      setDropdownPosition({
+        top: rect.bottom + 8,
+        left: rect.left,
+      });
+    };
+
+    updatePosition();
+
+    window.addEventListener("resize", updatePosition);
+    window.addEventListener("scroll", updatePosition, true);
+
+    return () => {
+      window.removeEventListener("resize", updatePosition);
+      window.removeEventListener("scroll", updatePosition, true);
+    };
+  }, [isFilterOpen]);
 
   const handleSubmitFilters = (filters: T[]) => {
     submitOptions(filters);
@@ -33,7 +67,8 @@ export const Filter = <T extends string>({
   return (
     <div className="relative">
       <Button
-        className="md:w-36"
+        ref={filterButtonRef}
+        className={`${props.className || ""} md:w-36`}
         onClick={() => setIsFilterOpen((prev) => !prev)}
         aria-expanded={isFilterOpen}
         aria-haspopup="menu"
@@ -44,17 +79,45 @@ export const Filter = <T extends string>({
           {isFilterOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </div>
       </Button>
-      {filterName !== "Due date" && isFilterOpen && !isDisabled && (
-        <FilterDropdown
-          options={options}
-          selectedOptions={selectedOptions}
-          handleSubmitFilters={handleSubmitFilters}
-          children={dropdownChildren}
-        />
-      )}
-      {filterName === "Due date" && isFilterOpen && !isDisabled && (
-        <DateFilterDropdown closeDateDropdown={() => setIsFilterOpen(false)} />
-      )}
+      {filterName !== "Due date" &&
+        isFilterOpen &&
+        !isDisabled &&
+        createPortal(
+          <div
+            style={{
+              position: "fixed",
+              top: dropdownPosition.top,
+              left: dropdownPosition.left + 10,
+              zIndex: 9999,
+            }}
+          >
+            <FilterDropdown
+              options={options}
+              selectedOptions={selectedOptions}
+              handleSubmitFilters={handleSubmitFilters}
+              children={dropdownChildren}
+            />
+          </div>,
+          document.body,
+        )}
+      {filterName === "Due date" &&
+        isFilterOpen &&
+        !isDisabled &&
+        createPortal(
+          <div
+            style={{
+              position: "fixed",
+              top: dropdownPosition.top,
+              left: dropdownPosition.left - 28,
+              zIndex: 9999,
+            }}
+          >
+            <DateFilterDropdown
+              closeDateDropdown={() => setIsFilterOpen(false)}
+            />
+          </div>,
+          document.body,
+        )}
     </div>
   );
 };
