@@ -65,7 +65,10 @@ export default function TasksPage() {
             }
           />
         </div>
-        <div className="flex items-center justify-between gap-2 border-b border-b-disabled px-3 py-4 md:gap-4 lg:px-7">
+        <div
+          className={`flex items-center justify-between gap-2 border-b border-b-disabled
+           scrollbar-thin scrollbar-thumb-accent scrollbar-track-transparent px-3 py-4 overflow-x-auto md:gap-4 lg:px-7`}
+        >
           <TasksFilters setActiveModal={setActiveModal} />
         </div>
         <CategoriesList openEditTaskModal={openEditTaskModal} />

@@ -112,6 +112,7 @@ export default function TasksFilters({ setActiveModal }: TasksFiltersProps) {
           />
         ) : null}
         <Filter
+          className="min-w-28"
           filterName="Due date"
           options={[]}
           selectedOptions={[]}

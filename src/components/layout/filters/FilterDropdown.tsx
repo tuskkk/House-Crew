@@ -29,13 +29,13 @@ export const FilterDropdown = <T extends string>({
     }
   };
   return (
-    <Dropdown className="-left-6 flex flex-col overflow-hidden max-h-96">
+    <Dropdown className="-left-6 flex flex-col overflow-hidden max-h-96 z-50">
       <div className="relative flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent py-2">
         {options.map((option) => (
           <button
             key={option.id}
             type="button"
-            className="flex w-full items-center gap-2 rounded-sm px-3 py-2 text-sm text-text-primary transition hover:bg-secondary"
+            className="flex w-full items-center gap-2 rounded-sm px-1 py-2 text-sm text-text-primary transition hover:bg-secondary lg:px-3"
             onClick={() => handleOptionClick(option.id)}
           >
             <Check

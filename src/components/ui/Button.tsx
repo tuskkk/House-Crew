@@ -1,8 +1,9 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes, RefObject } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   version?: "primary" | "secondary";
+  ref?: RefObject<HTMLButtonElement | null>;
 }
 
 const Button = ({ children, version = "primary", ...props }: ButtonProps) => {
