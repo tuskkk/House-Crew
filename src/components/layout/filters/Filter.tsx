@@ -88,7 +88,7 @@ export const Filter = <T extends string>({
               position: "fixed",
               top: dropdownPosition.top,
               left: dropdownPosition.left + 10,
-              zIndex: 9999,
+              zIndex: 2,
             }}
           >
             <FilterDropdown
@@ -109,7 +109,7 @@ export const Filter = <T extends string>({
               position: "fixed",
               top: dropdownPosition.top,
               left: dropdownPosition.left - 28,
-              zIndex: 9999,
+              zIndex: 2,
             }}
           >
             <DateFilterDropdown
