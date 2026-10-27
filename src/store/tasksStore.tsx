@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { TaskCategoryData } from "../types/category";
-import type { Cycle, Task, Priority } from "../types/task";
+import type { Cycle, Task, Priority, DateFiltersType } from "../types/task";
 import { categories, mockTasks } from "../data/mockTasks"; // Mock data for initial state
 
 interface TasksState {
@@ -18,7 +18,7 @@ interface TasksState {
   cycleFiltersChosen: Cycle[];
   priorityFiltersChosen: Priority[];
   assigneeFiltersChosen: string[];
-  dateFiltersChosen: { from: string | null; to: string | null };
+  dateFiltersChosen: DateFiltersType;
   setCycleFilters: (filters: Cycle[]) => void;
   setCategoryFilters: (filters: string[]) => void;
   setPriorityFilters: (filters: Priority[]) => void;

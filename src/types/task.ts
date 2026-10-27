@@ -58,6 +58,8 @@ type TaskSuccessData = {
   taskName: string | null;
 };
 
+type DateFiltersType = { from: string | null; to: string | null };
+
 export type {
   TaskPersonDetails,
   Cycle,
@@ -67,4 +69,5 @@ export type {
   ModalType,
   TaskDetailFilterType,
   TaskSuccessData,
+  DateFiltersType,
 };
