@@ -34,7 +34,7 @@ export default function TasksFilters({ setActiveModal }: TasksFiltersProps) {
     (state) => state.assigneeFiltersChosen,
   );
   const setAssigneeFilters = useTasks((state) => state.setAssigneeFilters);
-
+  const dueDateFiltersChosen = useTasks((state) => state.dateFiltersChosen);
   const categoriesOptions = useMemo(
     () =>
       categoriesList.map(({ id, name }) => ({
@@ -115,7 +115,7 @@ export default function TasksFilters({ setActiveModal }: TasksFiltersProps) {
           className="min-w-28"
           filterName="Due date"
           options={[]}
-          selectedOptions={[]}
+          selectedOptions={dueDateFiltersChosen}
           submitOptions={() => {}}
         />
       </div>

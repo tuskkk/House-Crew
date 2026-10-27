@@ -4,6 +4,8 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { FilterDropdown } from "./FilterDropdown";
+import { CountBadge } from "../../ui/CountBadge";
+import type { DateFiltersType } from "../../../types/task";
 
 type FilterProps<T extends string> = {
   filterName: string;
@@ -12,7 +14,7 @@ type FilterProps<T extends string> = {
     name: string;
   }[];
   isDisabled?: boolean;
-  selectedOptions: T[];
+  selectedOptions: T[] | DateFiltersType;
   submitOptions: (options: T[]) => void;
   dropdownChildren?: React.ReactNode;
   className?: string;
@@ -34,6 +36,14 @@ export const Filter = <T extends string>({
     top: 0,
     left: 0,
   });
+
+  const dueDateFiltersCount = (dateObj: DateFiltersType) =>
+    +!!dateObj.from + +!!dateObj.to;
+  const isDateFilter = !Array.isArray(selectedOptions);
+  const filtersChosenCount = isDateFilter
+    ? dueDateFiltersCount(selectedOptions as DateFiltersType)
+    : selectedOptions.length;
+  const showCountBadge = filtersChosenCount > 0;
 
   useEffect(() => {
     if (!isFilterOpen || !filterButtonRef.current) return;
@@ -78,6 +88,13 @@ export const Filter = <T extends string>({
           <span className="text-sm font-medium">{filterName}</span>
           {isFilterOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </div>
+        {showCountBadge && (
+          <CountBadge
+            className="absolute top-1 right-1 md:top-1.5 md:right-4"
+            count={filtersChosenCount}
+            label="elements chosen"
+          />
+        )}
       </Button>
       {filterName !== "Due date" &&
         isFilterOpen &&
@@ -93,7 +110,7 @@ export const Filter = <T extends string>({
           >
             <FilterDropdown
               options={options}
-              selectedOptions={selectedOptions}
+              selectedOptions={selectedOptions as T[]}
               handleSubmitFilters={handleSubmitFilters}
               children={dropdownChildren}
             />
