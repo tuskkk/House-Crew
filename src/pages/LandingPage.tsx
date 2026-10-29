@@ -1,5 +1,6 @@
 import { Header } from "../components/landing/Header";
 import { HeroSection } from "../components/landing/HeroSection";
+import { KeyFeatures } from "../components/landing/KeyFeatures";
 
 export default function LandingPage() {
   return (
@@ -8,6 +9,7 @@ export default function LandingPage() {
       <main className="flex-1">
         <div className="mx-auto w-full max-w-[var(--layout-width-xl)] px-2 pt-10 pb-6 md:px-4 lg:px-0 lg:pt-15">
           <HeroSection />
+          <KeyFeatures />
         </div>
       </main>
     </div>
