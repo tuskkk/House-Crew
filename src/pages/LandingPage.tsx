@@ -2,6 +2,7 @@ import { Header } from "../components/landing/Header";
 import { HeroSection } from "../components/landing/HeroSection";
 import { KeyFeatures } from "../components/landing/KeyFeatures";
 import { ProductOverview } from "../components/landing/ProductOverview";
+import { HowItWorks } from "../components/landing/HowItWorks";
 
 export default function LandingPage() {
   return (
@@ -12,6 +13,7 @@ export default function LandingPage() {
           <HeroSection />
           <KeyFeatures />
           <ProductOverview />
+          <HowItWorks />
         </div>
       </main>
     </div>
