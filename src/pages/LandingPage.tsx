@@ -3,6 +3,7 @@ import { HeroSection } from "../components/landing/HeroSection";
 import { KeyFeatures } from "../components/landing/KeyFeatures";
 import { ProductOverview } from "../components/landing/ProductOverview";
 import { HowItWorks } from "../components/landing/HowItWorks";
+import { ClosingBanner } from "../components/landing/ClosingBanner";
 
 export default function LandingPage() {
   return (
@@ -14,6 +15,7 @@ export default function LandingPage() {
           <KeyFeatures />
           <ProductOverview />
           <HowItWorks />
+          <ClosingBanner />
         </div>
       </main>
     </div>
