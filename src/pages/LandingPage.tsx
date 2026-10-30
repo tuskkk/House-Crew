@@ -4,6 +4,7 @@ import { KeyFeatures } from "../components/landing/KeyFeatures";
 import { ProductOverview } from "../components/landing/ProductOverview";
 import { HowItWorks } from "../components/landing/HowItWorks";
 import { ClosingBanner } from "../components/landing/ClosingBanner";
+import { Footer } from "../components/landing/Footer";
 
 export default function LandingPage() {
   return (
@@ -16,6 +17,7 @@ export default function LandingPage() {
           <ProductOverview />
           <HowItWorks />
           <ClosingBanner />
+          <Footer />
         </div>
       </main>
     </div>
