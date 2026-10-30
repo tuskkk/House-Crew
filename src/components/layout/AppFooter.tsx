@@ -1,4 +1,4 @@
-const Footer = () => {
+const AppFooter = () => {
   return (
     <footer className="border-t border-border bg-background">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-6 text-sm text-text-secondary md:flex-row md:justify-between md:px-6">
@@ -23,4 +23,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default AppFooter;

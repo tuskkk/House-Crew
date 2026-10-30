@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 import { useState } from "react";
 import Sidebar from "./Sidebar";
 import AppHeader from "./header/AppHeader";
-import Footer from "./Footer";
+import AppFooter from "./AppFooter";
 
 export default function AppLayout() {
   const [isOpen, setIsSidebarOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function AppLayout() {
               <Outlet />
             </div>
           </main>
-          <Footer />
+          <AppFooter />
         </div>
       </div>
     </div>
