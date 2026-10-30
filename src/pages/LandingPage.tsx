@@ -1,6 +1,7 @@
 import { Header } from "../components/landing/Header";
 import { HeroSection } from "../components/landing/HeroSection";
 import { KeyFeatures } from "../components/landing/KeyFeatures";
+import { ProductOverview } from "../components/landing/ProductOverview";
 
 export default function LandingPage() {
   return (
@@ -10,6 +11,7 @@ export default function LandingPage() {
         <div className="mx-auto w-full max-w-[var(--layout-width-xl)] px-2 pt-10 pb-6 md:px-4 lg:px-0 lg:pt-15">
           <HeroSection />
           <KeyFeatures />
+          <ProductOverview />
         </div>
       </main>
     </div>
