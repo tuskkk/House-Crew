@@ -1,13 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router";
+import { lazy } from "react";
 import LandingPage from "./pages/LandingPage.tsx";
-import LoginPage from "./pages/LoginPage.tsx";
-import RegisterPage from "./pages/RegisterPage.tsx";
+const LoginPage = lazy(() => import("./pages/LoginPage.tsx"));
+const RegisterPage = lazy(() => import("./pages/RegisterPage.tsx"));
+const DashboardPage = lazy(() => import("./pages/DashboardPage.tsx"));
 import AppLayout from "./components/layout/AppLayout.tsx";
-import DashboardPage from "./pages/DashboardPage.tsx";
-import CalendarPage from "./pages/CalendarPage.tsx";
-import TasksPage from "./pages/TasksPage.tsx";
-import StatisticsPage from "./pages/StatisticsPage.tsx";
-import SettingsPage from "./pages/SettingsPage.tsx";
+const CalendarPage = lazy(() => import("./pages/CalendarPage.tsx"));
+const TasksPage = lazy(() => import("./pages/TasksPage.tsx"));
+const StatisticsPage = lazy(() => import("./pages/StatisticsPage.tsx"));
+const SettingsPage = lazy(() => import("./pages/SettingsPage.tsx"));
 
 function AppRouter() {
   return (
