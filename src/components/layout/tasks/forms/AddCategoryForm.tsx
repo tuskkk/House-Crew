@@ -7,6 +7,9 @@ import Input from "../../../ui/Input";
 import AlertModel from "../../../ui/alerts/AlertModel";
 import { useTasks } from "../../../../store/tasksStore";
 import type { CategorySuccessData } from "../../../../types/category";
+import type { TaskCategoryData } from "../../../../types/category";
+import { categoryColors } from "../../../../constants/categoryColors";
+import { categories } from "../../../../data/mockTasks";
 
 type AddCategoryFormProps = {
   closeForm: () => void;
@@ -19,6 +22,15 @@ const AddCategoryForm = ({ closeForm }: AddCategoryFormProps) => {
   });
 
   const addCategory = useTasks((state) => state.addCategory);
+
+  const getNextCategoryColor = (categories: TaskCategoryData[]): string => {
+    const usedColors = categories.map((category) => category.color);
+
+    return (
+      categoryColors.find((color) => !usedColors.includes(color)) ??
+      categoryColors[categories.length % categoryColors.length]
+    );
+  };
 
   const categorySchema = z.object({
     name: z
@@ -41,6 +53,7 @@ const AddCategoryForm = ({ closeForm }: AddCategoryFormProps) => {
     addCategory({
       id: crypto.randomUUID(),
       name: data.name,
+      color: getNextCategoryColor(categories), // todo: color: data.color ?? getNextCategoryColor(categories),
       tasks: [],
     });
     setSuccessData({

@@ -1,7 +1,8 @@
 import type { Task } from "../types/task";
-import type { TaskCategoryData } from "../types/category";
+import type { TaskCategoryData, TaskCategoryInput } from "../types/category";
+import { categoryColors } from "../constants/categoryColors";
 
-const categories: TaskCategoryData[] = [
+const categories: TaskCategoryInput[] = [
   {
     id: "category-1",
     name: "Bathroom",
@@ -934,6 +935,23 @@ const categories: TaskCategoryData[] = [
   },
 ];
 
+const categoriesWithColors: TaskCategoryData[] = categories.map(
+  (category, index) => {
+    const color = categoryColors[index % categoryColors.length];
+    return {
+      ...category,
+      color,
+      tasks: category.tasks.map((task) => ({
+        ...task,
+        category: {
+          ...task.category,
+          color,
+        },
+      })),
+    };
+  },
+);
+
 const frequencyOptions = [
   "daily",
   "weekly",
@@ -944,48 +962,63 @@ const frequencyOptions = [
 ] as const;
 
 const priorityOptions = ["low", "medium", "high"] as const;
+
+const getMockDueDate = (
+  taskIndex: number,
+  categoryIndex: number,
+): string | null => {
+  // Every 4th task has no due date
+  if (taskIndex % 4 === 0) return null;
+
+  const date = new Date();
+  date.setDate(date.getDate() + taskIndex - categoryIndex * 2);
+
+  return date.toISOString().split("T")[0];
+};
 /* The way mockTasks is generated here causes task edition to be lost when the app is reloaded, because the mockTasks are regenerated from scratch each time.
    This won't be a problem after adding a backend, where tasks will be stored in a database, but it is a problem in development. */
-export const mockTasks: Task[] = categories.flatMap((category, categoryIndex) =>
-  category.tasks.map((task, taskIndex): Task => {
-    return {
-      id: task.id,
-      category: {
-        id: category.id,
-        name: category.name,
-      },
-      name: task.name,
-      details: {
-        cycleDetails:
-          taskIndex % 5 === 0
-            ? frequencyOptions[categoryIndex % frequencyOptions.length]
-            : undefined,
-        dueDate: null,
-        priority: priorityOptions[taskIndex % priorityOptions.length],
-        assigneeId: undefined,
-        statisticsDetails: {
-          count: {
-            general: 0,
-            byTime: {
-              day: 0,
-              week: 0,
-              month: 0,
-              year: 0,
+export const mockTasks: Task[] = categoriesWithColors.flatMap(
+  (category, categoryIndex) =>
+    category.tasks.map((task, taskIndex): Task => {
+      return {
+        id: task.id,
+        category: {
+          id: category.id,
+          name: category.name,
+          color: category.color,
+        },
+        name: task.name,
+        details: {
+          cycleDetails:
+            taskIndex % 5 === 0
+              ? frequencyOptions[categoryIndex % frequencyOptions.length]
+              : undefined,
+          dueDate: getMockDueDate(taskIndex, categoryIndex),
+          priority: priorityOptions[taskIndex % priorityOptions.length],
+          assigneeId: undefined,
+          statisticsDetails: {
+            count: {
+              general: 0,
+              byTime: {
+                day: 0,
+                week: 0,
+                month: 0,
+                year: 0,
+              },
             },
-          },
-          completionPercentage: {
-            general: 0,
-            byTime: {
-              day: 0,
-              week: 0,
-              month: 0,
-              year: 0,
+            completionPercentage: {
+              general: 0,
+              byTime: {
+                day: 0,
+                week: 0,
+                month: 0,
+                year: 0,
+              },
             },
           },
         },
-      },
-    };
-  }),
+      };
+    }),
 );
 
-export { categories };
+export { categoriesWithColors as categories };

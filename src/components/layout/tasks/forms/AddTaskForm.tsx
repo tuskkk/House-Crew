@@ -19,14 +19,15 @@ const AddTaskForm = ({ closeForm, categoriesList }: AddTaskFormProps) => {
   const addTask = useTasks((state) => state.addTask);
 
   const onSubmit = (data: TaskFormData) => {
+    const currentCategory = categoriesList.find(
+      (category: Category) => category.id === data.category,
+    );
     addTask({
       id: crypto.randomUUID(),
       category: {
         id: data.category,
-        name:
-          categoriesList.find(
-            (category: Category) => category.id === data.category,
-          )?.name || "",
+        name: currentCategory?.name || "",
+        color: currentCategory?.color || "",
       },
       name: data.name,
       details: {
