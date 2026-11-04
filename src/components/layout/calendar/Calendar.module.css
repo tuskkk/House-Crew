@@ -1,14 +1,15 @@
 .calendarWrapper {
-  :global(.fc) {
-    --fc-classic-border: #d6d2cd;
-    --fc-classic-today: #fedddb;
-    --fc-classic-background: #fff8f0;
-    --fc-neutral-bg-color: #fff8f0;
-    --fc-classic-button: #92140c;
-    --fc-classic-button-border: #92140c;
-    --fc-classic-button-hover-bg-color: #74100a;
-    --fc-classic-button-hover-border-color: #74100a;
-    --fc-classic-button-active-bg-color: #74100c;
-    --fc-classic-button-active-border-color: #74100c;
-  }
+  --fc-classic-primary: #92140c;
+  --fc-classic-primary-foreground: #1e1e24;
+  --fc-classic-foreground: #5c5d6b;
+  --fc-classic-border: #d6d2cd;
+  --fc-classic-today: #ffcf99;
+  --fc-classic-background: #ffffff;
+  --fc-neutral-bg-color: #fff8f0;
+  --fc-classic-button: #92140c;
+  --fc-classic-button-border: #92140c;
+  --fc-classic-button-hover-bg-color: #74100a;
+  --fc-classic-button-hover-border-color: #74100a;
+  --fc-classic-button-active-bg-color: #74100c;
+  --fc-classic-button-active-border-color: #74100c;
 }

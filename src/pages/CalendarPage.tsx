@@ -24,7 +24,7 @@ const events = [
 const CalendarPage = () => {
   return (
     <section className="w-full min-w-0 p-6">
-      <PageTitle name="Tasks" />
+      <PageTitle name="Calendar" />
       <div className="w-full min-w-0 p-4 overflow-hidden bg-background rounded-sm border border-disabled shadow-sm">
         <Calendar events={events} />
       </div>
