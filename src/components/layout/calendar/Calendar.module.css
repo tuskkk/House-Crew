@@ -6,10 +6,13 @@
   --fc-classic-today: #ffcf99;
   --fc-classic-background: #ffffff;
   --fc-neutral-bg-color: #fff8f0;
-  --fc-classic-button: #92140c;
-  --fc-classic-button-border: #92140c;
-  --fc-classic-button-hover-bg-color: #74100a;
-  --fc-classic-button-hover-border-color: #74100a;
-  --fc-classic-button-active-bg-color: #74100c;
-  --fc-classic-button-active-border-color: #74100c;
+  --fc-classic-button: #fff8f0;
+  --fc-classic-button-border: #fff8f0;
+  --fc-classic-button-foreground: #1e1e24;
+  --fc-classic-button-strong: #ffcf99;
+  --fc-classic-button-strong-border: #ffcf99;
+  --fc-classic-button-strong: #92140c;
+  --fc-classic-button-strong-border: #92140c;
+  --fc-classic-button-active-bg-color: #ffcf99;
+  --fc-classic-button-active-border-color: #ffcf99;
 }

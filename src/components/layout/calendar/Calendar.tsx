@@ -5,7 +5,6 @@ import classicThemePlugin from "@fullcalendar/react/themes/classic";
 import "@fullcalendar/react/skeleton.css";
 import "@fullcalendar/react/themes/classic/theme.css";
 import "@fullcalendar/react/themes/classic/palette.css";
-import plLocale from "@fullcalendar/react/locales/pl";
 import styles from "./Calendar.module.css";
 
 interface CalendarProps {
@@ -13,13 +12,17 @@ interface CalendarProps {
 }
 
 const Calendar = ({ events }: CalendarProps) => {
+  const headerToolbar = {
+    start: "today prev, next title",
+    end: "Month,Week,Day",
+  };
   return (
     <div className={styles.calendarWrapper}>
       <FullCalendar
         plugins={[classicThemePlugin, dayGridPlugin]}
         initialView="dayGridMonth"
-        locale={plLocale}
         firstDay={1}
+        headerToolbar={headerToolbar}
         events={events}
         height="auto"
       />
